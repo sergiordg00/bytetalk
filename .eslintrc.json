@@ -4,7 +4,6 @@
     "eslint:recommended",
     "plugin:tailwindcss/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
   "plugins": ["simple-import-sort"],
   "rules": {
     "indent": ["error", 2],
