@@ -28,7 +28,7 @@ export async function POST(req) {
   } catch(error) {
     console.log(JSON.stringify(error), 'REGISTRATION_ERROR');
 
-    return new NextResponse(error.meta.target === "User_email_key" ? "User already exists!" : "Internal server error", {
+    return new NextResponse(error?.meta?.target === "User_email_key" ? "User already exists!" : "Internal server error", {
       status: 500
     });
   }

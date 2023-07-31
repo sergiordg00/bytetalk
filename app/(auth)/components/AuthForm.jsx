@@ -11,6 +11,8 @@ import Input from "@/shared-components/inputs/Input";
 
 import AuthSocialButton from "./AuthSocialButton";
 
+// TODO: CREATE A LAYOUT FOLDER AND CREATE 2 AUTH LAYOUTS: USERACCOUTREQUIRED AND NOUSERACCOUNTREQUIRED
+
 export default function AuthForm() {
   const [typeOfForm, setTypeOfForm] = useState("register"); 
   const [formState, setFormState] = useState({
