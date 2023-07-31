@@ -12,7 +12,7 @@ import Input from "@/shared-components/inputs/Input";
 import AuthSocialButton from "./AuthSocialButton";
 
 export default function AuthForm() {
-  const [typeOfForm, setTypeOfForm] = useState("login"); 
+  const [typeOfForm, setTypeOfForm] = useState("register"); 
   const [formState, setFormState] = useState({
     name: "",
     email: "",
