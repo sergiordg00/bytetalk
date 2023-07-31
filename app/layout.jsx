@@ -1,9 +1,5 @@
-import { Inter } from 'next/font/google';
-
 import "@/assets/css/reset.css";
 import "@/assets/css/globals.css";
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'ByteTalk',
@@ -13,7 +9,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         {children}
       </body>
     </html>
