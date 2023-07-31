@@ -1,6 +1,9 @@
 "use client";
 
+import axios from "axios";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { BsGithub, BsGoogle } from "react-icons/bs";
 
 import Button from "@/shared-components/buttons/Button";
@@ -16,8 +19,7 @@ export default function AuthForm() {
     password: ""
   });
   const [formLoading, setFormLoading] = useState(false);
-  const [formErrors, setFormErrors] = useState([]);
-  
+
   function toggleForm() {
     setTypeOfForm(typeOfForm === "login" ? "register" : "login");
   }
@@ -27,14 +29,33 @@ export default function AuthForm() {
     setFormLoading(true);
 
     if(typeOfForm === "register") {
-      // Register
+      axios.post("/api/register", formState)
+        .then(() => toast.success("Account created successfully!"))
+        .catch((err) => toast.error(err.response.data))
+        .finally(() => setFormLoading(false));
     } else {
-      // Login
+      signIn("credentials", {
+        ...formState,
+        redirect: false
+      })
+        .then((callback) => {
+          if(callback?.error) {
+            toast.error("Invalid credentials!");
+          } else if(callback?.ok) {
+            toast.success("Logged in successfully!");
+          }
+        })
+        .finally(() => setFormLoading(false));
     }
   }
 
   function onSocialSignIn(provider) {
-    // Social Sign In
+    setFormLoading(true);
+
+    signIn(provider, {
+      redirect: false
+    })
+      .finally(() => setFormLoading(false));
   }
   
   return (
@@ -48,10 +69,8 @@ export default function AuthForm() {
                 type="text"
                 label="Name"
                 disabled={formLoading}
-                errors={formErrors}
                 value={formState.name}
                 onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                required
               />
             )}
 
@@ -60,10 +79,8 @@ export default function AuthForm() {
               type="email"
               label="Email address"
               disabled={formLoading}
-              errors={formErrors}
               value={formState.email}
               onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-              required
             />
 
             <Input
@@ -71,10 +88,8 @@ export default function AuthForm() {
               type="password"
               label="Password"
               disabled={formLoading}
-              errors={formErrors}
               value={formState.password}
               onChange={(e) => setFormState({ ...formState, password: e.target.value })}
-              required
             />
 
             <Button

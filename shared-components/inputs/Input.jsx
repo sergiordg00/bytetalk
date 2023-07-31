@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 
-export default function Input({ label, errors, ...inputProps }) {
+export default function Input({ label, errors=[], ...inputProps }) {
   return ( 
     <div className="w-full">
       <label className="block text-sm font-medium leading-6 text-gray-600" htmlFor={inputProps.id}>

@@ -1,5 +1,11 @@
+import { Inter } from "next/font/google";
+
+import ToasterContext from "@/context/ToasterContext";
+
 import "@/assets/css/reset.css";
 import "@/assets/css/globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'ByteTalk',
@@ -9,7 +15,8 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
+        <ToasterContext/>
         {children}
       </body>
     </html>
