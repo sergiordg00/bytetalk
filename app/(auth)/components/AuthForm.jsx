@@ -24,7 +24,6 @@ export default function AuthForm() {
 
   function onSubmit(e) {
     e.preventDefault();
-    console.log("prueba");
     setFormLoading(true);
 
     if(typeOfForm === "register") {
