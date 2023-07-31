@@ -1,8 +1,10 @@
 "use client";
 
 import axios from "axios";
-import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { BsGithub, BsGoogle } from "react-icons/bs";
 
@@ -11,16 +13,22 @@ import Input from "@/shared-components/inputs/Input";
 
 import AuthSocialButton from "./AuthSocialButton";
 
-// TODO: CREATE A LAYOUT FOLDER AND CREATE 2 AUTH LAYOUTS: USERACCOUTREQUIRED AND NOUSERACCOUNTREQUIRED
-
 export default function AuthForm() {
-  const [typeOfForm, setTypeOfForm] = useState("register"); 
+  const [typeOfForm, setTypeOfForm] = useState("login"); 
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     password: ""
   });
   const [formLoading, setFormLoading] = useState(false);
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if(session?.status === "authenticated") {
+      router.push("/users");
+    }
+  }, [session?.status]);
 
   function toggleForm() {
     setTypeOfForm(typeOfForm === "login" ? "register" : "login");
@@ -32,7 +40,13 @@ export default function AuthForm() {
 
     if(typeOfForm === "register") {
       axios.post("/api/register", formState)
-        .then(() => toast.success("Account created successfully!"))
+        .then(() => { 
+          toast.success("Account created successfully!"); 
+          signIn("credentials", { 
+            ...formState, 
+            redirect: false 
+          });
+        })
         .catch((err) => toast.error(err.response.data))
         .finally(() => setFormLoading(false));
     } else {

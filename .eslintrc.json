@@ -19,6 +19,7 @@
     "space-before-blocks": ["error", "always"],
     "no-var": "error",
     "tailwindcss/no-custom-classname": "off", /** We want to have the best of both worlds. Tailwind's utility classes and our custom utility classes */
+    "react-hooks/exhaustive-deps": "off", /** We don't want to have to add every dependency to the dependency array */
     "no-multiple-empty-lines": [
       "error", {
         "max": 1,
