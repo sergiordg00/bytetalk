@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import useRoutes from "@/hooks/useRoutes";
+import Avatar from "@/shared-components/ui/Avatar";
 
 function DesktopItem({ href, label, icon: Icon, active, onClick }) {
   return (
@@ -27,14 +28,14 @@ function DesktopItem({ href, label, icon: Icon, active, onClick }) {
   );
 }
 
-export default function DesktopSidebar() {
+export default function DesktopSidebar({ user }) {
   const routes = useRoutes();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="fixed inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-gray-200 bg-white py-4 lg:flex xl:px-6">
       <nav className="flex flex-col justify-between">
-        <ul role="list" className="flex flex-col items-center space-y-1">
+        <ul role="list" className="flex flex-col items-center gap-y-1">
           {routes.map((item) => (
             <DesktopItem
               key={item.label}
@@ -46,6 +47,12 @@ export default function DesktopSidebar() {
             />
           ))}
         </ul>
+      </nav>
+
+      <nav className="mt-4 flex flex-col items-center justify-between">
+        <div onClick={() => setIsOpen(true)} className="cursor-pointer hover:opacity-75">
+          <Avatar user={user}/>
+        </div>
       </nav>
     </div>
   );
