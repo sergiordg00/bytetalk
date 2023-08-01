@@ -1,7 +1,9 @@
 "use client";
 
 import axios from "axios";
+import { CldUploadButton } from "next-cloudinary";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { HiPhoto } from "react-icons/hi2";
 import { HiPaperAirplane } from "react-icons/hi2";
 
@@ -24,14 +26,31 @@ export default function MessageForm() {
     axios.post("/api/messages", {
       ...formState, /** The current value of the state will still be available, the changed value will only appear on next render */
       conversationId
+    })
+      .then((data) => {})
+      .catch(() => {
+        toast.error("Failed to send message");
+      });
+  }
+
+  function handleUploadImage(result) {
+    axios.post("/api/messages", {
+      conversationId,
+      image: result?.info?.secure_url
     });
   }
 
   return (
     <div className="flex w-full items-center gap-2 border-t border-solid border-gray-200 bg-white p-3 lg:gap-4">
-      <div className="cursor-pointer rounded-full p-1 transition hover:bg-neutral-200">
-        <HiPhoto size={30} className="text-sky-500"/>
-      </div>
+      <CldUploadButton
+        options={{ maxFiles: 1 }}
+        onUpload={handleUploadImage}
+        uploadPreset="ccii6bws"
+      >
+        <div className="cursor-pointer rounded-full p-1 transition hover:bg-neutral-200">
+          <HiPhoto size={30} className="text-sky-500"/>
+        </div>
+      </CldUploadButton>
 
       <form onSubmit={onSubmit} className="flex w-full items-center gap-2 lg:gap-4">
         <MessageInput
