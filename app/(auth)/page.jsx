@@ -4,6 +4,10 @@ import ByteTalkLogo from "@/assets/img/bytetalk-logo.png";
 
 import AuthForm from "./components/AuthForm";
 
+export const metadata = {
+  title: "Authentication Page",
+};
+
 export default function AuthPage() {
   return (
     <>
