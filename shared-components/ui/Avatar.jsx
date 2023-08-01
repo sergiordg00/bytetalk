@@ -7,8 +7,8 @@ import placeholderAvatar from "@/assets/img/placeholder.jpg";
 
 export default function Avatar({ user }) {
   return (
-    <div className="relative">
-      <div className="relative inline-block aspect-square w-9 overflow-hidden rounded-full border-[1px] border-solid border-gray-200 md:w-11">
+    <div className="relative h-9 w-9 md:h-11 md:w-11">
+      <div className="relative inline-block h-9 w-9 overflow-hidden rounded-full border-[1px] border-solid border-gray-200 md:h-11 md:w-11">
         <Image 
           alt="User Avatar"
           src={user?.image || placeholderAvatar}
