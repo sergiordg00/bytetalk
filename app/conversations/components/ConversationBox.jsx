@@ -8,8 +8,7 @@ import { useMemo } from "react";
 
 import useOtherUser from "@/hooks/useOtherUser";
 import Avatar from "@/shared-components/ui/Avatar";
-
-import SkeletonConversation from "./SkeletonConversation";
+import SkeletonConversation from "@/shared-components/ui/SkeletonConversation";
 
 export default function ConversationBox({ data, selected }) {
   const otherUser = useOtherUser(data);

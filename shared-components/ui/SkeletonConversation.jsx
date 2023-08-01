@@ -1,10 +1,14 @@
+import clsx from "clsx";
 import Image from "next/image";
 
 import placeholderAvatar from "@/assets/img/placeholder.jpg";
 
-export default function SkeletonConversation() {
+export default function SkeletonConversation({ headerVariation=false }) {
   return (
-    <div className="flex w-full items-center gap-x-2 rounded-lg p-3 hover:bg-neutral-100">
+    <div className={clsx(
+      "flex w-full items-center gap-x-2 rounded-lg",
+      !headerVariation && "p-3 hover:bg-neutral-100"
+    )}>
       <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border-[1px] border-solid border-gray-200 md:h-11 md:w-11">
         <Image 
           alt="Placeholder Avatar"
