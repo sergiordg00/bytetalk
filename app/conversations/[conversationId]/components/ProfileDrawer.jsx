@@ -42,7 +42,7 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
         <Dialog 
           as="div"
           className="relative z-50"
-          onClose={onClose}
+          onClose={()=>{}}
         >
           <Transition.Child
             as={Fragment}
@@ -54,7 +54,7 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
             leaveTo="opacity-0"
           >
             {/* eslint-disable-next-line tailwindcss/migration-from-tailwind-2 */}
-            <div className="fixed inset-0 bg-black bg-opacity-40"></div>
+            <div className="fixed inset-0 bg-black bg-opacity-40"/>
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-hidden">
@@ -84,7 +84,7 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
                               autoFocus={false}
                             >
                               <span className="sr-only">
-                              Close panel
+                                Close panel
                               </span>
 
                               <IoClose size={24} onClick={onClose}/>
@@ -125,7 +125,7 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
                             {!data.isGroup && (
                               <div>
                                 <h3 className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Email
+                                  Email
                                 </h3>
 
                                 <div className="mt-1 text-sm text-gray-900 sm:col-span-2">
@@ -139,7 +139,7 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
                                 <hr />
                                 <div className="">
                                   <h3 className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Joined
+                                    Joined
                                   </h3>
 
                                   <div className="mt-1 text-sm text-gray-900 sm:col-span-2">
@@ -155,7 +155,6 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
                       </div>
                     </div>
                   </Dialog.Panel>
-
                 </Transition.Child>
               </div>
             </div>
