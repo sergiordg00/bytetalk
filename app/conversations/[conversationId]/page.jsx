@@ -28,7 +28,7 @@ export default async function ConversationPage({ params }) {
       <div className="flex h-full flex-col">
         <Header conversation={conversation}/>
 
-        <Body/>
+        <Body initialMessages={messages}/>
 
         <MessageForm/>
       </div>
