@@ -38,7 +38,7 @@ export default function Modal({ isOpen, onClose, className, backdropClose=true, 
             document.body.classList.remove("overflow-hidden");
           }}
         >
-          <div className="fixed left-0 top-0 z-50 h-screen w-full overflow-y-auto">
+          <div className="fixed left-0 top-0 z-[51] h-screen w-full overflow-y-auto">
             <div onClick={backdropClose ? onClose : null} className={clsx(
               "flex min-h-full w-full items-center justify-center p-4",
               isOpen ? "modal-backdrop-enter" : "modal-backdrop-exit"
@@ -57,7 +57,6 @@ export default function Modal({ isOpen, onClose, className, backdropClose=true, 
           </div>
         </DelayUnmount>
         , document.getElementById("portal")
-      )
-      : null
+      ) : null
   );
 }

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { RotatingLines } from "react-loader-spinner";
 
-export default function Button({ type="button", fullWidth, onClick, secondary, danger, disabled, includeLoader=true, children }) {
+export default function Button({ type="button", fullWidth, onClick, secondary, danger, disabled, includeLoader=false, children }) {
   return (
     <button
       onClick={onClick}

@@ -7,8 +7,9 @@ import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
 
 import useOtherUser from "@/hooks/useOtherUser";
-import AppModal from "@/shared-components/modals/AppModal";
 import Avatar from "@/shared-components/ui/Avatar";
+
+import ConfirmModal from "./ConfirmModal";
 
 export default function ProfileDrawer({ isOpen, onClose, data }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -29,12 +30,10 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
 
   return (
     <>
-      <AppModal 
+      <ConfirmModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-      >
-        <p>Test!</p>
-      </AppModal>
+      />
 
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog 
