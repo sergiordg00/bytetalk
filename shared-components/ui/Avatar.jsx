@@ -12,6 +12,7 @@ export default function Avatar({ user }) {
         <Image 
           alt="User Avatar"
           src={user?.image || placeholderAvatar}
+          className="object-cover"
           fill
         />
       </div>

@@ -109,6 +109,19 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
                       Change
                     </Button>
                   </CldUploadButton>
+
+                  {formState.image && (
+                    <Button
+                      disabled={formLoading}
+                      onClick={() => setFormState({
+                        ...formState,
+                        image: null
+                      })}
+                      danger
+                    >
+                      Remove
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
