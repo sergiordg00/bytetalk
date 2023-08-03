@@ -21,6 +21,8 @@ export default async function RootLayout({ children }) {
           <ToasterContext/>
           {children}
         </AuthContext>
+
+        <div id="portal"/>
       </body>
     </html>
   );

@@ -1,0 +1,88 @@
+.modal-backdrop-enter {
+  animation: modalBackdropEnter 300ms ease-out forwards;
+}
+
+.modal-backdrop-exit {
+  animation: modalBackdropExit 300ms ease-in forwards;
+}
+
+.modal-enter {
+  animation: modalScaleEnter 200ms ease-out forwards;
+}
+
+.modal-exit {
+  animation: modalScaleExit 200ms ease-in forwards;
+}
+
+@media (max-width: 640px) {
+  .modal-enter {
+    animation: modalTranslateEnter 200ms ease-out forwards;
+  }
+
+  .modal-exit {
+    animation: modalTranslateExit 200ms ease-in forwards;
+  }
+}
+
+@keyframes modalBackdropEnter {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes modalBackdropExit {
+  from {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes modalScaleEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalScaleExit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes modalTranslateEnter {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalTranslateExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
