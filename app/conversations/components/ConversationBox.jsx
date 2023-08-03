@@ -8,6 +8,7 @@ import { useMemo } from "react";
 
 import useOtherUser from "@/hooks/useOtherUser";
 import Avatar from "@/shared-components/ui/Avatar";
+import AvatarGroup from "@/shared-components/ui/AvatarGroup";
 import SkeletonConversation from "@/shared-components/ui/SkeletonConversation";
 
 export default function ConversationBox({ data, selected }) {
@@ -57,7 +58,12 @@ export default function ConversationBox({ data, selected }) {
       "relative flex w-full cursor-pointer items-center space-x-3 rounded-lg p-3 transition hover:bg-neutral-100",
       selected ? "bg-neutral-100" : "bg-white"
     )}>
-      <Avatar user={otherUser}/>
+      {
+        data.isGroup ?
+          <AvatarGroup users={data.users}/>
+          :
+          <Avatar user={otherUser}/>
+      }
 
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">

@@ -8,6 +8,7 @@ import { HiEllipsisHorizontal } from "react-icons/hi2";
 
 import useOtherUser from "@/hooks/useOtherUser";
 import Avatar from "@/shared-components/ui/Avatar";
+import AvatarGroup from "@/shared-components/ui/AvatarGroup";
 import SkeletonConversation from "@/shared-components/ui/SkeletonConversation";
 
 import ProfileDrawer from "./ProfileDrawer";
@@ -42,7 +43,12 @@ export default function Header({ conversation }) {
               <SkeletonConversation headerVariation/> 
               :
               <>
-                <Avatar user={otherUser}/>
+                {
+                  conversation.isGroup ?
+                    <AvatarGroup users={conversation.users}/>
+                    :
+                    <Avatar user={otherUser}/>
+                }
 
                 <div className="flex flex-col gap-y-[2px] lg:gap-0">
                   <h2 className="text-sm font-medium text-gray-900">

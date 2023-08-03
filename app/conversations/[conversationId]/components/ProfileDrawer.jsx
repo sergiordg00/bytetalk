@@ -8,6 +8,7 @@ import { IoClose, IoTrash } from "react-icons/io5";
 
 import useOtherUser from "@/hooks/useOtherUser";
 import Avatar from "@/shared-components/ui/Avatar";
+import AvatarGroup from "@/shared-components/ui/AvatarGroup";
 
 import ConfirmModal from "./ConfirmModal";
 
@@ -93,7 +94,12 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         <div className="flex flex-col items-center">
                           <div className="mb-2">
-                            <Avatar user={otherUser}/>
+                            {
+                              data.isGroup ? 
+                                <AvatarGroup users={data.users}/>
+                                : 
+                                <Avatar user={otherUser}/>
+                            }
                           </div>
 
                           <p className="text-md font-medium">
@@ -119,6 +125,18 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
 
                         <div className="w-full py-5 sm:px-0 sm:pt-0">
                           <div className="space-y-8 px-4 sm:space-y-6 sm:px-6">
+                            {data.isGroup && (
+                              <div>
+                                <h3 className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
+                                  Emails
+                                </h3>
+
+                                <div className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                                  {data.users.map((user) => user.email).join(", ")}
+                                </div>
+                              </div>
+                            )}
+
                             {!data.isGroup && (
                               <div>
                                 <h3 className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">

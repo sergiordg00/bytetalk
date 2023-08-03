@@ -15,7 +15,7 @@ export async function POST(req) {
       });
     }
 
-    if(isGroup && (!members || !name || members.length < 2)) {
+    if(isGroup && (!members || !name || members.length < 1)) {
       return new NextResponse("Invalid data", {
         status: 400
       });
