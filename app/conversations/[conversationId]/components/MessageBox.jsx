@@ -4,10 +4,14 @@ import clsx from "clsx";
 import format from "date-fns/format";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 import Avatar from "@/shared-components/ui/Avatar";
 
+import ImageModal from "./ImageModal";
+
 export default function MessageBox({ data, isLast }) {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const session = useSession();
   const isOwn = session?.data?.user?.email === data?.sender?.email;
   const seenList = (data.seen || []).filter((user) => user.email !== data?.sender?.email).map((user) => user.name).join(", ");
@@ -32,6 +36,12 @@ export default function MessageBox({ data, isLast }) {
 
   return (
     <div className={container}>
+      <ImageModal
+        isOpen={isImageModalOpen}
+        onClose={() => setIsImageModalOpen(false)}
+        src={data.image}
+      />
+      
       <div className={avatar}>
         <Avatar user={data.sender}/>
       </div>
@@ -56,6 +66,7 @@ export default function MessageBox({ data, isLast }) {
                 width="288"
                 src={data.image}
                 className="cursor-pointer object-cover transition hover:scale-110"
+                onClick={() => setIsImageModalOpen(true)}
               />
               :
               data.body
