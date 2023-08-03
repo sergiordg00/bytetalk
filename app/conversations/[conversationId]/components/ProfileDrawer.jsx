@@ -7,8 +7,8 @@ import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
 
 import useOtherUser from "@/hooks/useOtherUser";
+import AppModal from "@/shared-components/modals/AppModal";
 import Avatar from "@/shared-components/ui/Avatar";
-import Modal from "@/shared-components/ui/Modal";
 
 export default function ProfileDrawer({ isOpen, onClose, data }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -29,20 +29,18 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
 
   return (
     <>
-      <Modal 
+      <AppModal 
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
       >
-        <div className="bg-white p-5">
-          <p>Test</p>
-        </div>
-      </Modal>
+        <p>Test!</p>
+      </AppModal>
 
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog 
           as="div"
           className="relative z-50"
-          onClose={()=>{}}
+          onClose={onClose}
         >
           <Transition.Child
             as={Fragment}

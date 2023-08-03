@@ -17,7 +17,7 @@ export default function AppModal({ isOpen, onClose, children }) {
         onClick={onClose}
       >
         <span className="sr-only">
-            Close
+          Close
         </span>
 
         <IoClose className="h-auto w-6"/>
