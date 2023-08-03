@@ -3,7 +3,6 @@
 import axios from "axios";
 import clsx from "clsx";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { CldUploadButton } from "next-cloudinary";
 import { useRef,useState } from "react";
 import { toast } from "react-hot-toast";
@@ -15,7 +14,6 @@ import Input from "@/shared-components/inputs/Input";
 import AppModal from "@/shared-components/modals/AppModal";
 
 export default function SettingsModal({ isOpen, onClose, currentUser }) {
-  const router = useRouter();
   const [formState, setFormState] = useState({
     name: currentUser?.name,
     image: currentUser?.image
