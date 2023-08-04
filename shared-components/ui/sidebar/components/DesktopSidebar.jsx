@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 import useRoutes from "@/hooks/useRoutes";
@@ -33,11 +34,12 @@ function DesktopItem({ href, label, icon: Icon, active, onClick }) {
 export default function DesktopSidebar({ user }) {
   const routes = useRoutes();
   const [isOpen, setIsOpen] = useState(false);
+  const session = useSession();
 
   return (
     <>
       <SettingsModal
-        currentUser={user}
+        currentUser={session?.data?.user || user}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       />
@@ -60,7 +62,7 @@ export default function DesktopSidebar({ user }) {
 
         <nav className="mt-4 flex flex-col items-center justify-between">
           <div onClick={() => setIsOpen(true)} className="cursor-pointer hover:opacity-75">
-            <Avatar user={user}/>
+            <Avatar user={session?.data?.user || user}/>
           </div>
         </nav>
       </div>

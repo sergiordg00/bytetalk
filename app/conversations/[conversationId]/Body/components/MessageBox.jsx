@@ -43,13 +43,18 @@ export default function MessageBox({ data, isLast }) {
       />
       
       <div className={avatar}>
-        <Avatar user={data.sender}/>
+        <Avatar user={isOwn ? session.data.user : data.sender}/>
       </div>
 
       <div className={body}>
         <div className="flex items-center gap-1">
           <div className="text-sm text-gray-500">
-            {data.sender.name}
+            {
+              isOwn ?
+                session.data.user.name
+                :
+                data.sender.name
+            }
           </div>
 
           <div className="text-xs text-gray-400">

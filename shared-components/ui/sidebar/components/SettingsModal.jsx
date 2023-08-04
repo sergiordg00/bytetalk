@@ -3,8 +3,9 @@
 import axios from "axios";
 import clsx from "clsx";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { CldUploadButton } from "next-cloudinary";
-import { useRef,useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { IoMdAddCircle } from "react-icons/io";
 
@@ -20,6 +21,7 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
   });
   const [formLoading, setFormLoading] = useState(false);
   const uploadButton = useRef(null);
+  const { update } = useSession();
 
   function handleUpload(result) {
     setFormState({
@@ -34,6 +36,7 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
 
     axios.post("/api/settings", formState)
       .then(() => {
+        update(formState);
         toast.success("Settings saved");
         onClose();
       })
@@ -95,12 +98,17 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
                   </div>
 
                   <CldUploadButton
-                    className="px-3 py-2 text-sm font-semibold text-gray-900 hover:text-gray-500"
                     options={{ maxFiles: 1 }}
                     onUpload={handleUpload}
                     uploadPreset="ccii6bws"
                   >
-                    Change
+                    <Button
+                      disabled={formLoading}
+                      reference={uploadButton}
+                      secondary
+                    >
+                      Change
+                    </Button>
                   </CldUploadButton>
 
                   {formState.image && (
