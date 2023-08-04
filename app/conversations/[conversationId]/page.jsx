@@ -2,9 +2,9 @@ import getConversationById from "@/services/getConversationById";
 import getMessages from "@/services/getMessages";
 import EmptyState from "@/shared-components/ui/EmptyState";
 
-import Body from "./components/Body";
-import Header from "./components/Header";
-import MessageForm from "./components/MessageForm";
+import Body from "./Body";
+import Header from "./Header";
+import MessageForm from "./MessageForm";
 
 export default async function ConversationPage({ params }) {
   /* better to have both request parallel */

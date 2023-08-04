@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import useConversation from "@/hooks/useConversation";
 import { pusherClient } from "@/libs/pusher";
 
-import MessageBox from "./MessageBox";
+import MessageBox from "./components/MessageBox";
 
 export default function Body({ initialMessages }) {
   const { conversationId } = useConversation();

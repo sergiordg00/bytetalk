@@ -9,7 +9,7 @@ import { HiPaperAirplane } from "react-icons/hi2";
 
 import useConversation from "@/hooks/useConversation";
 
-import MessageInput from "./MessageInput";
+import MessageInput from "./components/MessageInput";
 
 const INITIAL_FORM_STATE = {
   message: ""
