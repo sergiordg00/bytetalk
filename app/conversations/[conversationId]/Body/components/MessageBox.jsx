@@ -94,6 +94,7 @@ export default function MessageBox({ data, isLast }) {
                     src={data.image}
                     className="cursor-pointer object-cover transition hover:scale-110"
                     onClick={() => setIsImageModalOpen(true)}
+                    draggable={false}
                   />
                   :
                   data.body

@@ -44,6 +44,8 @@ export default function ReplyPreview() {
           <button type="button" className="rounded-md bg-sky-500 p-2" onClick={()=>setShouldMount(false)}>
             Cierra esto papi
           </button>
+
+          {/* TODO: EL BORDE IZQUIERDO (TIPO WHATSAPP) SERA COLOR SKY-500 */}
         </div>
       </div>
     </DelayUnmount>

@@ -16,6 +16,7 @@ export default function Avatar({ user }) {
           alt="User Avatar"
           src={user?.image || placeholderAvatar}
           className="object-cover"
+          draggable={false}
           fill
         />
       </div>
