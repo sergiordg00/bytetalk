@@ -1,3 +1,4 @@
+import ReplyProvider from "@/context/ReplyContext";
 import getConversationById from "@/services/getConversationById";
 import getMessages from "@/services/getMessages";
 import EmptyState from "@/shared-components/ui/EmptyState";
@@ -24,14 +25,16 @@ export default async function ConversationPage({ params }) {
   }
 
   return (
-    <div className="h-full lg:pl-80">
-      <div className="flex h-full flex-col">
-        <Header conversation={conversation}/>
+    <ReplyProvider>
+      <div className="h-full lg:pl-80">
+        <div className="flex h-full flex-col">
+          <Header conversation={conversation}/>
 
-        <Body initialMessages={messages}/>
+          <Body initialMessages={messages}/>
 
-        <MessageForm/>
+          <MessageForm/>
+        </div>
       </div>
-    </div>
+    </ReplyProvider>
   );
 }

@@ -62,7 +62,7 @@ export default function Body({ initialMessages }) {
   }, [messages?.length]);
 
   return (
-    <div className="flex-1 overflow-y-auto pb-2" ref={listRef}>
+    <div className="flex-1 overflow-y-auto overflow-x-hidden pb-2" ref={listRef}>
       {messages.map((message, index) => (
         <MessageBox
           key={message.id}

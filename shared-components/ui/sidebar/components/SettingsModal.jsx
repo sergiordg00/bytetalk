@@ -98,6 +98,7 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
                   </div>
 
                   <CldUploadButton
+                    type="button"
                     options={{ maxFiles: 1 }}
                     onUpload={handleUpload}
                     uploadPreset="ccii6bws"
