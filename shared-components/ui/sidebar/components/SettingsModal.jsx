@@ -95,17 +95,12 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
                   </div>
 
                   <CldUploadButton
+                    className="px-3 py-2 text-sm font-semibold text-gray-900 hover:text-gray-500"
                     options={{ maxFiles: 1 }}
                     onUpload={handleUpload}
                     uploadPreset="ccii6bws"
                   >
-                    <Button
-                      disabled={formLoading}
-                      reference={uploadButton}
-                      secondary
-                    >
-                      Change
-                    </Button>
+                    Change
                   </CldUploadButton>
 
                   {formState.image && (
