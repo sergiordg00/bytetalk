@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
 
+import { useIsActive } from "@/context/ActiveUsersContext";
 import useOtherUser from "@/hooks/useOtherUser";
 import Avatar from "@/shared-components/ui/Avatar";
 import AvatarGroup from "@/shared-components/ui/AvatarGroup";
@@ -15,19 +16,27 @@ import ConfirmModal from "./ConfirmModal";
 export default function ProfileDrawer({ isOpen, onClose, data }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const otherUser = useOtherUser(data);
+  const isActive = useIsActive(otherUser?.email);
+
   const joinedDate = useMemo(() => {
     return otherUser ? format(new Date(otherUser.createdAt), "PP") : "";
   }, [otherUser?.createdAt]);
+
   const title = useMemo(() => {
     return data.name || otherUser?.name;
   }, [data.name, otherUser?.name]);
+
   const statusText = useMemo(() => {
     if(data.isGroup) {
       return `${data.users.length} members`;
     }
 
-    return "Active";
-  }, [data]);
+    if(isActive) {
+      return "Active";
+    }
+
+    return "Offline";
+  }, [data, isActive]);
 
   return (
     <>
@@ -66,9 +75,7 @@ export default function ProfileDrawer({ isOpen, onClose, data }) {
                   leave="transform transition ease-in-out duration-500"
                   leaveTo="translate-x-full"
                 >
-                  <Dialog.Panel
-                    className="pointer-events-auto w-screen max-w-md"
-                  >
+                  <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
                     <div className="flex h-full flex-col overflow-y-auto bg-white py-6 shadow-xl">
                       <div className="px-4 sm:px-6">
                         <div className="flex items-start justify-end">
