@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 
-import { ActiveUsersProvider } from "@/context/ActiveUsersContext";
 import AuthContext from "@/context/AuthContext";
 import ToasterContext from "@/context/ToasterContext";
 
@@ -19,11 +18,9 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AuthContext>
-          <ActiveUsersProvider>
-            <ToasterContext/>
+          <ToasterContext/>
             
-            {children}
-          </ActiveUsersProvider>
+          {children}
         </AuthContext>
         
         <div id="portal"></div>

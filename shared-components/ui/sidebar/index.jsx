@@ -1,3 +1,4 @@
+import { ActiveUsersProvider } from "@/context/ActiveUsersContext";
 import getCurrentUser from "@/services/getCurrentUser";
 
 import DesktopSidebar from "./components/DesktopSidebar";
@@ -7,14 +8,16 @@ export default async function Sidebar({ children }) {
   const user = await getCurrentUser();
 
   return (
-    <div className="h-full">
-      <DesktopSidebar user={user}/>
+    <ActiveUsersProvider>
+      <div className="h-full">
+        <DesktopSidebar user={user}/>
 
-      <MobileFooter />
+        <MobileFooter />
       
-      <main className="h-full lg:pl-20">
-        {children}
-      </main>
-    </div>
+        <main className="h-full lg:pl-20">
+          {children}
+        </main>
+      </div>
+    </ActiveUsersProvider>
   );
 }
