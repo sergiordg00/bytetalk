@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
+import { IoClose } from "react-icons/io5";
 
 import { useReply } from "@/context/ReplyContext";
 import DelayUnmount from "@/shared-components/common/DelayUnmount";
+import Reply from "@/shared-components/ui/Reply";
 
 export default function ReplyPreview() {
   const { reply, setReply } = useReply();
@@ -14,6 +16,8 @@ export default function ReplyPreview() {
   useEffect(() => {
     if (reply) {
       setShouldMount(true);
+    } else if(shouldMount) {
+      setShouldMount(false);
     }
   }, [reply]);
 
@@ -25,13 +29,15 @@ export default function ReplyPreview() {
     }
   }, [shouldMount]);
 
-  // useEffect(() => {
-  //   if (applyEnterAnimation) {
-  //     replyContainer.current.style.height = `${replyContent.current.offsetHeight}px`;
-  //   } else {
-  //     replyContainer.current.style.height = "0px";
-  //   }
-  // }, [applyEnterAnimation]);
+  useEffect(() => {
+    if(replyContainer.current) {
+      if (applyEnterAnimation) {
+        replyContainer.current.style.height = `${replyContent.current.offsetHeight}px`;
+      } else {
+        replyContainer.current.style.height = "";
+      }
+    }
+  }, [applyEnterAnimation, reply]);
 
   return (
     <DelayUnmount 
@@ -39,13 +45,17 @@ export default function ReplyPreview() {
       shouldUnmount={!shouldMount}
       onUnmount={() => setReply(null)}
     >
-      <div className="h-0 w-full overflow-hidden rounded-lg bg-neutral-300 transition-all" ref={replyContainer}>
-        <div className="h-12 w-full p-2" ref={replyContent}>
-          <button type="button" className="rounded-md bg-sky-500 p-2" onClick={()=>setShouldMount(false)}>
-            Cierra esto papi
-          </button>
+      <div className="h-0 w-full overflow-hidden transition-all duration-300" ref={replyContainer}>
+        <div className="relative w-full" ref={replyContent}>
+          <Reply data={reply}/>
 
-          {/* TODO: EL BORDE IZQUIERDO (TIPO WHATSAPP) SERA COLOR SKY-500 */}
+          <button type="button" className="absolute right-0 top-0 p-1 text-gray-400 hover:text-gray-500">
+            <span className="sr-only">
+              Close
+            </span>
+
+            <IoClose size={20} onClick={() => setShouldMount(false)}/>
+          </button>
         </div>
       </div>
     </DelayUnmount>

@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { HiPhoto } from "react-icons/hi2";
 import { HiPaperAirplane } from "react-icons/hi2";
 
+import { useReply } from "@/context/ReplyContext";
 import useConversation from "@/hooks/useConversation";
 
 import MessageInput from "./components/MessageInput";
@@ -18,11 +19,13 @@ const INITIAL_FORM_STATE = {
 
 export default function MessageForm() {
   const { conversationId } = useConversation();
+  const { reply, setReply } = useReply();
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
 
   function onSubmit(e) {
     e.preventDefault();
     setFormState(INITIAL_FORM_STATE);
+    setReply(null);
 
     axios.post("/api/messages", {
       ...formState, /** The current value of the state will still be available, the changed value will only appear on next render */
@@ -46,7 +49,7 @@ export default function MessageForm() {
     <div className="w-full border-t border-solid border-gray-200 bg-white p-3 lg:gap-4">
       <form onSubmit={onSubmit} className="flex w-full items-end gap-2 lg:gap-4">
         <div className="w-full rounded-lg bg-neutral-200 p-2">
-          <ReplyPreview />
+          {reply && <ReplyPreview/>}
 
           <div className="flex w-full items-center gap-1">
             <CldUploadButton
