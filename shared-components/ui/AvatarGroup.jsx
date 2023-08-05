@@ -27,7 +27,7 @@ export default function AvatarGroup({ users=[] }) {
           <Image
             alt="User Avatar"
             className="object-cover"
-            src={users.image || placeholderAvatar}
+            src={user.image || placeholderAvatar}
             fill
           />
         </div>

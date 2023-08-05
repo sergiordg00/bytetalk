@@ -29,7 +29,8 @@ export default function MessageForm() {
 
     axios.post("/api/messages", {
       ...formState, /** The current value of the state will still be available, the changed value will only appear on next render */
-      conversationId
+      conversationId,
+      replyId: reply?.id
     })
       .then((data) => {})
       .catch(() => {
