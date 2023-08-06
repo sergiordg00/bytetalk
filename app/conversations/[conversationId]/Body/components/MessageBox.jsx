@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 import { FaReply } from "react-icons/fa";
+import { GiBrain } from "react-icons/gi";
 
 import { useReply } from "@/context/ReplyContext";
 import Avatar from "@/shared-components/ui/Avatar";
@@ -74,14 +75,25 @@ export default function MessageBox({ data, isLast }) {
         </div>
 
         <div className="flex w-fit items-center gap-x-2">
-          <div 
-            className={clsx(
-              "cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100",
-              !isOwn && "order-2"
+          <div className={clsx(
+            "flex items-center gap-x-1",
+            !isOwn && "order-2"
+          )}>
+            <div 
+              className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
+              onClick={() => setReply(data)}
+            >
+              <FaReply size={18} className="text-gray-900"/> 
+            </div>
+            
+            {!data.image && !isOwn && (
+              <div 
+                className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
+                onClick={() => setReply(data)}
+              >
+                <GiBrain size={24} className="text-gray-900"/> 
+              </div>
             )}
-            onClick={() => setReply(data)}
-          >
-            <FaReply size={18} className="text-gray-900"/> 
           </div>
           
           <div className={message}>

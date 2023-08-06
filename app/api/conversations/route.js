@@ -6,7 +6,7 @@ import getCurrentUser from "@/services/getCurrentUser";
 
 export async function POST(req) {
   try {
-    const user = await getCurrentUser(req);
+    const user = await getCurrentUser();
     const body = await req.json();
     const { userId, isGroup, members, name } = body;
 
