@@ -39,9 +39,13 @@ export default function MessageForm() {
   }
 
   function handleUploadImage(result) {
+    setFormState(INITIAL_FORM_STATE);
+    setReply(null);
+    
     axios.post("/api/messages", {
       conversationId,
-      image: result?.info?.secure_url
+      image: result?.info?.secure_url,
+      replyId: reply?.id
     });
   }
 
@@ -71,7 +75,6 @@ export default function MessageForm() {
               required
               placeholder="Write a message..."
             />
-
           </div>
         </div>
 

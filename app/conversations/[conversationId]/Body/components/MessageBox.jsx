@@ -10,6 +10,7 @@ import { FaReply } from "react-icons/fa";
 
 import { useReply } from "@/context/ReplyContext";
 import Avatar from "@/shared-components/ui/Avatar";
+import Reply from "@/shared-components/ui/Reply";
 
 import ImageModal from "./ImageModal";
 
@@ -34,9 +35,9 @@ export default function MessageBox({ data, isLast }) {
     isOwn && "items-end"
   );
   const message = clsx(
-    "w-fit overflow-hidden text-sm",
+    "w-fit overflow-hidden px-3 py-2 text-sm",
     isOwn ? "bg-sky-500 text-white" : "bg-gray-100",
-    data.image ? "rounded-md p-0" : "rounded-lg px-3 py-2"
+    data.image ? "rounded-md" : "rounded-lg"
   );
 
   return (
@@ -57,7 +58,7 @@ export default function MessageBox({ data, isLast }) {
         "relative flex w-full cursor-move items-center",
         !isDragging && "transition"
       )}>
-        <div className={container}>
+        <div className={container} id={data.id}>
           <ImageModal
             isOpen={isImageModalOpen}
             onClose={() => setIsImageModalOpen(false)}
@@ -85,6 +86,18 @@ export default function MessageBox({ data, isLast }) {
             </div>
 
             <div className={message}>
+              {data.reply && (
+                <div 
+                  className={clsx(
+                    "mb-2 w-full cursor-pointer rounded-lg transition",
+                    isOwn ? "bg-sky-300 hover:bg-sky-400" : "bg-gray-300 hover:bg-gray-400"
+                  )}
+                  onClick={() => document.getElementById(data.reply.id).scrollIntoView({ behavior: "smooth" })}
+                >
+                  <Reply data={data.reply} isInMessageBox/>
+                </div>
+              )}
+
               {
                 data.image ?
                   <Image
@@ -97,7 +110,9 @@ export default function MessageBox({ data, isLast }) {
                     draggable={false}
                   />
                   :
-                  data.body
+                  <p>
+                    {data.body}
+                  </p>
               }
             </div>
 

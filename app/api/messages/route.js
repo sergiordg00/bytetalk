@@ -44,8 +44,25 @@ export async function POST(req) {
         }
       },
       include: {
-        sender: true,
-        seen: true
+        sender: {
+          select: {
+            email: true,
+            name: true,
+            image: true
+          }
+        },
+        seen: true,
+        reply: {
+          include: {
+            sender: {
+              select: {
+                email: true,
+                name: true,
+                image: true
+              }
+            }
+          }
+        }
       }
     });
 
@@ -84,6 +101,7 @@ export async function POST(req) {
 
     return NextResponse.json(newMessage);
   } catch(error) {
+    console.log(error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
