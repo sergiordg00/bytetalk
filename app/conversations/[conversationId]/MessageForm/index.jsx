@@ -30,7 +30,7 @@ export default function MessageForm() {
     axios.post("/api/messages", {
       ...formState, /** The current value of the state will still be available, the changed value will only appear on next render */
       conversationId,
-      replyId: reply?.id
+      reply: reply
     })
       .then((data) => {})
       .catch(() => {
@@ -45,7 +45,7 @@ export default function MessageForm() {
     axios.post("/api/messages", {
       conversationId,
       image: result?.info?.secure_url,
-      replyId: reply?.id
+      reply: reply
     });
   }
 

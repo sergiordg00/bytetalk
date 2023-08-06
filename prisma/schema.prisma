@@ -78,8 +78,5 @@ model Message {
   senderId String @db.ObjectId
   sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
 
-  replyId String? @db.ObjectId
-  reply Message? @relation("Reply", fields: [replyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  repliesToThisMessage Message[] @relation("Reply")
+  reply Json? 
 }

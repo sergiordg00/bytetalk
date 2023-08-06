@@ -4,7 +4,7 @@ import clsx from "clsx";
 import format from "date-fns/format";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Draggable from "react-draggable";
 import { FaReply } from "react-icons/fa";
 
@@ -21,6 +21,13 @@ export default function MessageBox({ data, isLast }) {
   const session = useSession();
   const isOwn = session?.data?.user?.email === data?.sender?.email;
   const seenList = (data.seen || []).filter((user) => user.email !== data?.sender?.email).map((user) => user.name).join(", ");
+  const parsedReply = useMemo(() => {
+    try {
+      return JSON.parse(data.reply);
+    } catch (e) {
+      return null;
+    }
+  }, [data.reply]);
 
   /** Some CSS classes */
   const container = clsx(
@@ -92,9 +99,9 @@ export default function MessageBox({ data, isLast }) {
                     "mb-2 w-full cursor-pointer rounded-lg transition",
                     isOwn ? "bg-sky-300 hover:bg-sky-400" : "bg-gray-300 hover:bg-gray-400"
                   )}
-                  onClick={() => document.getElementById(data.reply.id).scrollIntoView({ behavior: "smooth" })}
+                  onClick={() => document.getElementById(parsedReply.id).scrollIntoView({ behavior: "smooth" })}
                 >
-                  <Reply data={data.reply} isInMessageBox/>
+                  <Reply data={parsedReply} isInMessageBox/>
                 </div>
               )}
 

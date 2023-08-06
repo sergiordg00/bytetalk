@@ -46,8 +46,19 @@ export async function POST(req, { params }) {
         id: lastMessage.id
       },
       include: {
-        sender: true,
-        seen: true
+        sender: {
+          select: {
+            email: true,
+            name: true,
+            image: true
+          }
+        },
+        seen: {
+          select: {
+            email: true,
+            name: true
+          }
+        },
       },
       data: {
         seen: {

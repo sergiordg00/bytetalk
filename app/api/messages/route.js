@@ -8,7 +8,16 @@ export async function POST(req) {
   try {
     const currentUser = await getCurrentUser(req);
     const body = await req.json();
-    const { message, image, conversationId, replyId } = body;
+    const { message, image, conversationId, reply } = body;
+    const replyData = reply ? JSON.stringify({
+      id: reply.id,
+      body: reply.body,
+      image: reply.image,
+      sender: {
+        email: reply.sender.email,
+        name: reply.sender.name
+      },
+    }) : undefined;
 
     if(!currentUser?.id || !currentUser?.email) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -32,11 +41,7 @@ export async function POST(req) {
             id: currentUser.id
           }
         },
-        reply: replyId ? {
-          connect: {
-            id: replyId
-          }
-        } : undefined,
+        reply: replyData,
         seen: {
           connect: {
             id: currentUser.id
@@ -52,17 +57,6 @@ export async function POST(req) {
           }
         },
         seen: true,
-        reply: {
-          include: {
-            sender: {
-              select: {
-                email: true,
-                name: true,
-                image: true
-              }
-            }
-          }
-        }
       }
     });
 
@@ -101,7 +95,6 @@ export async function POST(req) {
 
     return NextResponse.json(newMessage);
   } catch(error) {
-    console.log(error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
