@@ -25,17 +25,17 @@ export default function ConversationsList({ initialConversations, users, current
       />
 
       <aside className={clsx(
-        "fixed inset-y-0 overflow-y-auto border-r border-solid border-gray-200 pb-20",
+        "fixed inset-y-0 overflow-y-auto border-r border-solid border-borderprimary bg-bgsecondary pb-20",
         "lg:left-20 lg:block lg:w-80 lg:pb-0",
         isOpen ? "hidden" : "left-0 block w-full"
       )}>
         <div className="px-5">
           <div className="mb-4 flex items-center justify-between pt-4">
-            <h2 className="text-xl font-bold text-neutral-800">
+            <h2 className="text-xl font-bold text-textprimary">
             Messages
             </h2>
 
-            <div className="cursor-pointer rounded-full bg-gray-100 p-2 text-gray-600 hover:opacity-75" onClick={() => setIsModalOpen(true)}>
+            <div className="cursor-pointer rounded-full bg-hoverprimary p-2 text-textsecondary hover:opacity-75" onClick={() => setIsModalOpen(true)}>
               <MdOutlineGroupAdd size={20}/>
             </div>
           </div>

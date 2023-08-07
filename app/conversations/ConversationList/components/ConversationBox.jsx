@@ -55,8 +55,8 @@ export default function ConversationBox({ data, selected }) {
   
   return (
     <div onClick={onClick} className={clsx(
-      "relative flex w-full cursor-pointer items-center space-x-3 rounded-lg p-3 transition hover:bg-neutral-100",
-      selected ? "bg-neutral-100" : "bg-white"
+      "relative flex w-full cursor-pointer items-center space-x-3 rounded-lg p-3 transition hover:bg-hoverprimary",
+      selected ? "bg-hoverprimary" : "bg-bgsecondary"
     )}>
       {
         data.isGroup ?
@@ -68,12 +68,12 @@ export default function ConversationBox({ data, selected }) {
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div className="mb-1 flex items-center justify-between">
-            <p className="text-sm font-semibold text-gray-900">
+            <p className="text-sm font-semibold text-textprimary">
               {data.name || otherUser?.name}
             </p>
 
             {lastMessage?.createdAt && (
-              <p className="text-xs font-light text-gray-400">
+              <p className="text-xs font-light text-textsecondary">
                 {format(new Date(lastMessage.createdAt), "p")}
               </p>
             )}
@@ -81,7 +81,7 @@ export default function ConversationBox({ data, selected }) {
 
           <p className={clsx(
             "truncate text-sm",
-            hasSeen ? "text-gray-500" : "font-medium text-black"
+            hasSeen ? "text-textsecondary" : "font-medium text-textprimary"
           )}>
             {lastMessageText}
           </p>

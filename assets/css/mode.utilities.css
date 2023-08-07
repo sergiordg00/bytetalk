@@ -1,0 +1,38 @@
+/* Default => Light Mode */
+:root {
+  --bg-primary: white;
+  --bg-secondary: white;
+  --bg-tertiary: white;
+  --bg-empty: #f3f4f6;
+
+  --text-primary: black;
+  --text-secondary: rgb(107, 114, 128);
+  --text-muted: rgb(156, 163, 175);
+
+  --border-primary: rgb(229, 231, 235);
+
+  --accent-primary: #0ea5e9;
+  --accent-secondary: #e5e7eb;
+
+  --hover-primary: #e5e7eb;
+  --hover-secondary: #d1d5db;
+}
+
+[data-mode="dark"] {
+  --bg-primary: #40444b;
+  --bg-secondary: #2f3136;
+  --bg-tertiary: #202225;
+  --bg-empty: #40444b;
+
+  --text-primary: white;
+  --text-secondary: #bbb;
+  --text-muted: rgb(107, 114, 128);
+
+  --border-primary: transparent;
+
+  --accent-primary: #d946ef;
+  --accent-secondary: transparent;/* TODO */
+
+  --hover-primary: transparent;/* TODO */
+  --hover-secondary: transparent;/* TODO */
+}
