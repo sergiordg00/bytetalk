@@ -11,9 +11,9 @@ function MobileItem({ href, icon: Icon, active, onClick }) {
     <Link 
       href={href}
       className={clsx(
-        "flex w-full justify-center gap-x-3 p-4 text-gray-500",
-        "hover:bg-gray-100 hover:text-black",
-        active && "bg-gray-100 text-black"
+        "flex w-full justify-center gap-x-3 p-4 text-textsecondary",
+        "hover:bg-hoverprimary hover:text-textprimary",
+        active && "bg-hoverprimary text-textprimary"
       )}
       onClick={onClick}
     >
@@ -31,7 +31,7 @@ export default function MobileFooter() {
   }
 
   return (
-    <div className="fixed bottom-0 z-40 flex w-full items-center justify-between border-t-[1px] border-solid border-t-gray-200 bg-white lg:hidden">
+    <div className="fixed bottom-0 z-40 flex w-full items-center justify-between border-t-[1px] border-solid border-t-borderprimary bg-bgtertiary lg:hidden">
       {routes.map((item) => (
         <MobileItem
           key={item.label}

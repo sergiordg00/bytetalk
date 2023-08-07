@@ -11,7 +11,7 @@ export default function Avatar({ user }) {
 
   return (
     <div className="relative h-9 w-9 md:h-11 md:w-11">
-      <div className="relative inline-block h-9 w-9 overflow-hidden rounded-full border-[1px] border-solid border-gray-200 md:h-11 md:w-11">
+      <div className="relative inline-block h-9 w-9 overflow-hidden rounded-full border-[1px] border-solid border-borderprimary md:h-11 md:w-11">
         <Image 
           alt="User Avatar"
           src={user?.image || placeholderAvatar}
@@ -23,7 +23,7 @@ export default function Avatar({ user }) {
 
       {isActive && (
         <span className={clsx(
-          "absolute right-0 top-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-white",
+          "absolute right-0 top-0 block h-2 w-2 rounded-full bg-green-500 ring-2 ring-bgprimary",
           "md:h-3 md:w-3"
         )}/>
       )}

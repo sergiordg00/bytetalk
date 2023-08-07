@@ -12,9 +12,9 @@ export default function Button({ type="button", fullWidth, onClick, secondary, d
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         fullWidth && "w-full",
         disabled && "cursor-default opacity-50",
-        secondary ? "text-gray-900 hover:text-gray-500" : "text-white",
+        secondary ? "text-textprimary hover:text-textsecondary" : "text-white",
         danger && "bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-500",
-        (!danger && !secondary) && "bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600"
+        (!danger && !secondary) && "bg-accentprimary hover:opacity-75"
       )}
       ref={reference}
     >

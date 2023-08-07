@@ -7,7 +7,7 @@ import AuthForm from "./components/AuthForm";
 export default function AuthPage() {
   return (
     <>
-      <div className="flex min-h-full w-full flex-col justify-center bg-gray-100 py-12 sm:px-6 lg:px-8">
+      <div className="flex min-h-full w-full flex-col justify-center bg-bgempty py-12 sm:px-6 lg:px-8">
         <main className="sm:mx-auto sm:w-full sm:max-w-md">
           <Image
             alt="Byetalk Logo"
@@ -17,7 +17,7 @@ export default function AuthPage() {
             className="mx-auto h-auto w-[48px] lg:w-[58px]"
           />
 
-          <h2 className="mt-4 text-center text-2xl font-bold tracking-tight text-gray-900 lg:text-3xl">
+          <h2 className="mt-4 text-center text-2xl font-bold tracking-tight text-textprimary lg:text-3xl">
             Welcome to ByteTalk!
           </h2>
 

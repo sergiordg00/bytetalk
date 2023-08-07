@@ -77,7 +77,7 @@ export default function AuthForm() {
   return (
     <>
       <div className="mt-8 w-full sm:mx-auto sm:max-w-md">
-        <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-bgtertiary px-4 py-8 shadow sm:rounded-lg sm:px-10">
           <form className="flex flex-col items-start gap-y-6" onSubmit={onSubmit}>
             {typeOfForm === "register" && (
               <Input
@@ -119,9 +119,9 @@ export default function AuthForm() {
           </form>
 
           <div className="relative mt-6 flex items-center justify-center">
-            <div className="absolute h-[1px] w-full bg-gray-300"/>
+            <div className="absolute h-[1px] w-full bg-textmuted"/>
 
-            <span className="relative z-[2] bg-white px-2 text-sm text-gray-500">
+            <span className="relative z-[2] bg-bgtertiary px-2 text-sm text-textsecondary">
               Or continue with
             </span>
           </div>
@@ -131,12 +131,12 @@ export default function AuthForm() {
             <AuthSocialButton Icon={BsGoogle} onClick={()=>onSocialSignIn("google")}/>
           </div>
 
-          <p className="mt-6 flex items-center justify-center text-sm text-gray-500">
+          <p className="mt-6 flex items-center justify-center text-sm text-textsecondary">
             {typeOfForm === "register" ? "Already have an account?" : "New to ByteTalk?"}
 
             &nbsp;
 
-            <button className="underline hover:text-sky-600" onClick={toggleForm}>
+            <button className="underline hover:text-accentprimary" onClick={toggleForm}>
               {typeOfForm === "register" ? "Sign in" : "Create an account"}
             </button>
           </p>

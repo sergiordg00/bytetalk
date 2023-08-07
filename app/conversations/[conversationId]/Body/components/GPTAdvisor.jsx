@@ -90,7 +90,7 @@ function Body({ data, onClose }) {
       </form>
 
       {gptResult && (
-        <div className="mt-3 flex w-full items-start gap-x-2 rounded-lg bg-sky-100 p-3">
+        <div className="mt-4 flex w-full items-start gap-x-2 rounded-lg bg-sky-100 p-3">
           <GiBrain size={20} className="shrink-0 text-sky-500"/>
 
           <p className="w-full whitespace-pre-line text-justify text-sm text-gray-500">

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
+import { useTheme } from "@/context/ThemeContext";
 import useRoutes from "@/hooks/useRoutes";
 import Avatar from "@/shared-components/ui/Avatar";
 
@@ -16,9 +17,9 @@ function DesktopItem({ href, label, icon: Icon, active, onClick }) {
       <Link 
         href={href} 
         className={clsx(
-          "group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-6 text-gray-500",
-          "hover:bg-gray-100 hover:text-black",
-          active && "bg-gray-100 text-black"
+          "group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-6 text-textsecondary",
+          "hover:textprimary hover:bg-hoverprimary",
+          active && "textprimary bg-hoverprimary"
         )}
       >
         <Icon className="h-6 w-6 shrink-0"/>
@@ -32,8 +33,9 @@ function DesktopItem({ href, label, icon: Icon, active, onClick }) {
 }
 
 export default function DesktopSidebar({ user }) {
-  const routes = useRoutes();
+  const { toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const routes = useRoutes();
   const session = useSession();
 
   return (
@@ -44,7 +46,7 @@ export default function DesktopSidebar({ user }) {
         onClose={() => setIsOpen(false)}
       />
 
-      <div className="fixed inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-gray-200 bg-white py-4 lg:flex xl:px-6">
+      <div className="fixed inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-borderprimary bg-bgtertiary py-4 lg:flex xl:px-6">
         <nav className="flex flex-col justify-between">
           <ul role="list" className="flex flex-col items-center gap-y-1">
             {routes.map((item) => (
@@ -60,7 +62,11 @@ export default function DesktopSidebar({ user }) {
           </ul>
         </nav>
 
-        <nav className="mt-4 flex flex-col items-center justify-between">
+        <nav className="mt-4 flex flex-col items-center justify-between gap-y-4">
+          <button className="cursor-pointer rounded-lg bg-fuchsia-500 p-2 text-sm transition hover:ring-2 hover:ring-fuchsia-900 active:translate-y-1 active:scale-90" onClick={toggleTheme}>
+            Change theme
+          </button>
+
           <div onClick={() => setIsOpen(true)} className="cursor-pointer hover:opacity-75">
             <Avatar user={session?.data?.user || user}/>
           </div>

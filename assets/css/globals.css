@@ -5,3 +5,46 @@
 html, body, :root {
   height: 100%;
 }
+
+@layer base {
+  /* Default => Light Mode */
+  :root {
+    --bg-primary: 255 255 255;
+    --bg-secondary: 255 255 255;
+    --bg-tertiary: 255 255 255;
+    --bg-empty: 243 244 246; 
+
+    --text-primary: 0 0 0;
+    --text-secondary: 107 114 128;
+    --text-muted: 156 163 175;
+
+    --border-primary: 229 231 235;
+    --border-secondary: 213 213 213;
+
+    --accent-primary: 14 165 233;
+    --accent-secondary: 229 231 235;
+
+    --hover-primary: 229 231 235;
+    --hover-secondary: 209 213 219;
+  }
+
+  [data-theme="dark"] {
+    --bg-primary: 64 68 75;
+    --bg-secondary: 47 49 54;
+    --bg-tertiary: 32 34 37;
+    --bg-empty: 64 68 75;
+
+    --text-primary: 255 255 255;
+    --text-secondary: 187 187 187;
+    --text-muted: 107 114 128;
+
+    --border-primary: 0 0 0;
+    --border-secondary: 87 94 108;
+
+    --accent-primary: 217 70 239;
+    --accent-secondary: 45 45 45;/* TODO */
+
+    --hover-primary: 78 78 78;
+    --hover-secondary: 255 0 0;/* TODO */
+  }
+}

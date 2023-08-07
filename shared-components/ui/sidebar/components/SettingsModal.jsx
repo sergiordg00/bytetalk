@@ -50,12 +50,12 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
     <AppModal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={onSubmit}>
         <div className="space-y-5">
-          <div className="border-b border-solid border-gray-900/10 pb-8">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+          <div className="border-b border-solid border-textprimary/10 pb-8">
+            <h2 className="text-base font-semibold leading-7 text-textprimary">
               Profile
             </h2>
 
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 text-sm leading-6 text-textsecondary">
               Edit your public information.
             </p>
 
@@ -72,7 +72,7 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
               />
 
               <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
+                <label className="block text-sm font-medium leading-6 text-textprimary">
                   Photo
                 </label>
 
@@ -87,13 +87,13 @@ export default function SettingsModal({ isOpen, onClose, currentUser }) {
                     <Image
                       width="48"
                       height="48"
-                      className="h-full w-full rounded-full border-[1px] border-solid border-gray-200 object-cover"
+                      className="h-full w-full rounded-full border-[1px] border-solid border-borderprimary object-cover"
                       src={formState.image || placeholderAvatar}
                       alt="User Avatar"
                     />
 
                     {!formState.image && (
-                      <IoMdAddCircle className="absolute -right-1 -top-1 h-5 w-5 text-sky-500"/>
+                      <IoMdAddCircle className="absolute right-[-0.30rem] top-[-0.30rem] h-5 w-5 text-accentprimary"/>
                     )}
                   </div>
 

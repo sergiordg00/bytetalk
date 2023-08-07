@@ -20,7 +20,7 @@ export default function AvatarGroup({ users=[] }) {
         <div 
           key={user.id}
           className={clsx(
-            "absolute overflow-hidden rounded-full border border-solid border-gray-200",
+            "absolute overflow-hidden rounded-full border border-solid border-borderprimary",
             avatarPositions.current[index]
           )}
         >

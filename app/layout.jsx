@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 
 import AuthContext from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import ToasterContext from "@/context/ToasterContext";
 
 import "@/assets/css/reset.css";
@@ -17,11 +18,14 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthContext>
-          <ToasterContext/>
+        <ThemeProvider>
+          <AuthContext>
+            <ToasterContext/>
             
-          {children}
-        </AuthContext>
+            {children}
+          </AuthContext>
+        
+        </ThemeProvider>
         
         <div id="portal"></div>
       </body>
