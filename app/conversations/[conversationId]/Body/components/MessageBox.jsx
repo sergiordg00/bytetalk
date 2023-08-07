@@ -12,11 +12,13 @@ import { useReply } from "@/context/ReplyContext";
 import Avatar from "@/shared-components/ui/Avatar";
 import Reply from "@/shared-components/ui/Reply";
 
+import GPTAdvisor from "./GPTAdvisor";
 import ImageModal from "./ImageModal";
 
 export default function MessageBox({ data, isLast }) {
   const { setReply } = useReply();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [messageToAdvise, setMessageToAdvise] = useState(false);
   const session = useSession();
   const isOwn = session?.data?.user?.email === data?.sender?.email;
   const seenList = (data.seen || []).filter((user) => user.email !== data?.sender?.email).map((user) => user.name).join(", ");
@@ -47,95 +49,102 @@ export default function MessageBox({ data, isLast }) {
   );
 
   return (
-    <div className={container} id={data.id}>
-      <ImageModal
-        isOpen={isImageModalOpen}
-        onClose={() => setIsImageModalOpen(false)}
-        src={data.image}
+    <>
+      <GPTAdvisor 
+        data={messageToAdvise} 
+        onClose={() => setMessageToAdvise(null)}
       />
+    
+      <div className={container} id={data.id}>
+        <ImageModal
+          isOpen={isImageModalOpen}
+          onClose={() => setIsImageModalOpen(false)}
+          src={data.image}
+        />
       
-      <div className={avatar}>
-        <Avatar user={isOwn ? session.data.user : data.sender}/>
-      </div>
-
-      <div className={body}>
-        <div className="flex items-center gap-1">
-          <div className="text-sm text-gray-500">
-            {
-              isOwn ?
-                session.data.user.name
-                :
-                data.sender.name
-            }
-          </div>
-
-          <div className="text-xs text-gray-400">
-            {format(new Date(data.createdAt), "p")}
-          </div>
+        <div className={avatar}>
+          <Avatar user={isOwn ? session.data.user : data.sender}/>
         </div>
 
-        <div className="flex w-fit items-center gap-x-2">
-          <div className={clsx(
-            "flex items-center gap-x-1",
-            !isOwn && "order-2"
-          )}>
-            <div 
-              className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
-              onClick={() => setReply(data)}
-            >
-              <FaReply size={18} className="text-gray-900"/> 
+        <div className={body}>
+          <div className="flex items-center gap-1">
+            <div className="text-sm text-gray-500">
+              {
+                isOwn ?
+                  session.data.user.name
+                  :
+                  data.sender.name
+              }
             </div>
-            
-            {!data.image && !isOwn && (
+
+            <div className="text-xs text-gray-400">
+              {format(new Date(data.createdAt), "p")}
+            </div>
+          </div>
+
+          <div className="flex w-fit items-center gap-x-2">
+            <div className={clsx(
+              "flex items-center gap-x-1",
+              !isOwn && "order-2"
+            )}>
               <div 
                 className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
                 onClick={() => setReply(data)}
               >
-                <GiBrain size={24} className="text-gray-900"/> 
+                <FaReply size={18} className="text-gray-900"/> 
               </div>
-            )}
-          </div>
-          
-          <div className={message}>
-            {data.reply && (
-              <div 
-                className={clsx(
-                  "mb-2 w-full cursor-pointer rounded-lg transition",
-                  isOwn ? "bg-sky-300 hover:bg-sky-400" : "bg-gray-300 hover:bg-gray-400"
-                )}
-                onClick={() => document.getElementById(parsedReply.id).scrollIntoView({ behavior: "smooth" })}
-              >
-                <Reply data={parsedReply} isInMessageBox/>
-              </div>
-            )}
-
-            {
-              data.image ?
-                <div className="h-[250px] w-[250px] overflow-hidden">
-                  <Image
-                    alt="Message image"
-                    height="250"
-                    width="250"
-                    src={data.image}
-                    className="cursor-pointer object-cover transition hover:scale-110"
-                    onClick={() => setIsImageModalOpen(true)}
-                    draggable={false}
-                  />
+            
+              {!data.image && !isOwn && (
+                <div 
+                  className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
+                  onClick={() => setMessageToAdvise(data)}
+                >
+                  <GiBrain size={24} className="text-gray-900"/> 
                 </div>
-                :
-                <p>
-                  {data.body}
-                </p>
-            }
-          </div>
-        </div>
+              )}
+            </div>
+          
+            <div className={message}>
+              {data.reply && (
+                <div 
+                  className={clsx(
+                    "mb-2 w-full cursor-pointer rounded-lg transition",
+                    isOwn ? "bg-sky-300 hover:bg-sky-400" : "bg-gray-300 hover:bg-gray-400"
+                  )}
+                  onClick={() => document.getElementById(parsedReply.id).scrollIntoView({ behavior: "smooth" })}
+                >
+                  <Reply data={parsedReply} isInMessageBox/>
+                </div>
+              )}
 
-        {isLast && isOwn && seenList.length > 0 && (
-          <div className="text-xs font-light text-gray-500">
-                Seen by {seenList}
+              {
+                data.image ?
+                  <div className="h-[250px] w-[250px] overflow-hidden">
+                    <Image
+                      alt="Message image"
+                      height="250"
+                      width="250"
+                      src={data.image}
+                      className="cursor-pointer object-cover transition hover:scale-110"
+                      onClick={() => setIsImageModalOpen(true)}
+                      draggable={false}
+                    />
+                  </div>
+                  :
+                  <p>
+                    {data.body}
+                  </p>
+              }
+            </div>
           </div>
-        )}
+
+          {isLast && isOwn && seenList.length > 0 && (
+            <div className="text-xs font-light text-gray-500">
+                Seen by {seenList}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

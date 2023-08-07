@@ -42,7 +42,7 @@ export async function POST(req) {
       presence_penalty: 0,
     });
 
-    return NextResponse.json(response);
+    return NextResponse.json(response.data.choices[0].message);
   } catch(err) {
     return new NextResponse("Internal server error", {
       status: 500
