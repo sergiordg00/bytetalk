@@ -38,16 +38,16 @@ function Body({ data, onClose }) {
   return (
     <div className="w-full">
       <form onSubmit={onSubmit} className="flex w-full flex-col items-center gap-x-4 gap-y-2 sm:flex-row sm:items-start">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sky-100">
-          <GiBrain size={26} className="text-sky-500" />
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accentprimary/30">
+          <GiBrain size={26} className="text-accentprimary" />
         </div>
 
         <div className="flex w-full flex-col items-center gap-y-2 sm:items-start">
-          <h2 className="text-base font-semibold leading-6 text-gray-900">
+          <h2 className="text-base font-semibold leading-6 text-textprimary">
             Welcome to GPTAdvisor!
           </h2>
             
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-textsecondary">
             Ever found yourself unsure about the perfect response in a conversation? 
             Our AI-powered feature is here to help! Simply select a message you want 
             to respond to, and provide a brief context about the ongoing conversation or situation. 
@@ -90,10 +90,10 @@ function Body({ data, onClose }) {
       </form>
 
       {gptResult && (
-        <div className="mt-4 flex w-full items-start gap-x-2 rounded-lg bg-sky-100 p-3">
-          <GiBrain size={20} className="shrink-0 text-sky-500"/>
+        <div className="mt-4 flex w-full items-start gap-x-2 rounded-lg bg-accentprimary/30 p-3">
+          <GiBrain size={20} className="shrink-0 text-accentprimary"/>
 
-          <p className="w-full whitespace-pre-line text-justify text-sm text-gray-500">
+          <p className="w-full whitespace-pre-line text-justify text-sm text-textprimary">
             {gptResult}
           </p>
         </div>

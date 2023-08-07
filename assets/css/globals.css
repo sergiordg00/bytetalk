@@ -38,13 +38,13 @@ html, body, :root {
     --text-secondary: 187 187 187;
     --text-muted: 107 114 128;
 
-    --border-primary: 0 0 0;
+    --border-primary: 45 45 45;
     --border-secondary: 87 94 108;
 
     --accent-primary: 217 70 239;
     --accent-secondary: 45 45 45;/* TODO */
 
     --hover-primary: 78 78 78;
-    --hover-secondary: 255 0 0;/* TODO */
+    --hover-secondary: 110 110 110;
   }
 }

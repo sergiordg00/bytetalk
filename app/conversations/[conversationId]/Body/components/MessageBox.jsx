@@ -44,7 +44,7 @@ export default function MessageBox({ data, isLast }) {
   );
   const message = clsx(
     "w-fit overflow-hidden px-3 py-2 text-sm",
-    isOwn ? "bg-sky-500 text-white" : "bg-gray-100",
+    isOwn ? "bg-accentprimary text-white" : "bg-accentsecondary",
     data.image ? "rounded-md" : "rounded-lg"
   );
 
@@ -68,7 +68,7 @@ export default function MessageBox({ data, isLast }) {
 
         <div className={body}>
           <div className="flex items-center gap-1">
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-textsecondary">
               {
                 isOwn ?
                   session.data.user.name
@@ -77,7 +77,7 @@ export default function MessageBox({ data, isLast }) {
               }
             </div>
 
-            <div className="text-xs text-gray-400">
+            <div className="text-xs text-textmuted">
               {format(new Date(data.createdAt), "p")}
             </div>
           </div>
@@ -88,18 +88,18 @@ export default function MessageBox({ data, isLast }) {
               !isOwn && "order-2"
             )}>
               <div 
-                className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
+                className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-hoversecondary group-hover:opacity-100"
                 onClick={() => setReply(data)}
               >
-                <FaReply size={18} className="text-gray-900"/> 
+                <FaReply size={18} className="text-textprimary"/> 
               </div>
             
               {!data.image && !isOwn && (
                 <div 
-                  className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-gray-200 group-hover:opacity-100"
+                  className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-hoversecondary group-hover:opacity-100"
                   onClick={() => setMessageToAdvise(data)}
                 >
-                  <GiBrain size={24} className="text-gray-900"/> 
+                  <GiBrain size={24} className="text-textprimary"/> 
                 </div>
               )}
             </div>
@@ -139,7 +139,7 @@ export default function MessageBox({ data, isLast }) {
           </div>
 
           {isLast && isOwn && seenList.length > 0 && (
-            <div className="text-xs font-light text-gray-500">
+            <div className="text-xs font-light text-textsecondary">
                 Seen by {seenList}
             </div>
           )}

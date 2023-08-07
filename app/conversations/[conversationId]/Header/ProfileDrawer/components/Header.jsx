@@ -9,13 +9,13 @@ export default function Header({ onClose }) {
           <button 
             type="button" 
             className={clsx(
-              "rounded-md bg-white text-gray-400 hover:text-gray-500",
+              "rounded-md bg-bgprimary text-textsecondary hover:text-textmuted",
               "focus:outline-none"
             )}
             autoFocus={false}
           >
             <span className="sr-only">
-                                Close panel
+              Close panel
             </span>
 
             <IoClose size={24} onClick={onClose}/>
