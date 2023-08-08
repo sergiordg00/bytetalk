@@ -7,7 +7,7 @@ import UserBox from "./UserBox";
 export default function UsersList({ users }) {
   return (
     <aside className={clsx(
-      "fixed inset-y-0 left-0 block w-full overflow-y-auto border-r border-borderprimary bg-bgsecondary pb-20",
+      "fixed inset-y-0 left-0 block w-full overflow-y-auto border-r border-solid border-borderprimary bg-bgsecondary pb-20",
       "lg:left-20 lg:w-80 lg:pb-0"
     )}>
       <div className="px-5">
