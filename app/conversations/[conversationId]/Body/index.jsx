@@ -1,20 +1,23 @@
 "use client";
 
 import axios from "axios";
+import clsx from "clsx";
 import { find } from "lodash";
 import { useSession } from "next-auth/react";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import useConversation from "@/hooks/useConversation";
 import usePlaySound from "@/hooks/usePlaySound";
 import { pusherClient } from "@/libs/pusher";
 
+import { useMessages } from "../context/MessagesContext";
+
 import MessageBox from "./components/MessageBox";
 
-export default function Body({ initialMessages }) {
+export default function Body() {
   const { conversationId } = useConversation();
-  const [messages, setMessages] = useState(initialMessages);
+  const { messages, setMessages } = useMessages();
+  const [isListScrolledToBottom, setIsListScrolledToBottom] = useState(false);
   const listRef = useRef();
   const sounds = usePlaySound();
   const session = useSession();
@@ -28,19 +31,17 @@ export default function Body({ initialMessages }) {
     pusherClient.subscribe(conversationId);
 
     const newMessageHandler = (newMessage) => {
-      setMessages((prevValue) => {
-        if(find(prevValue, { id: newMessage.id })) {
-          return prevValue;
-        } else {
-          if(newMessage.sender.email === session.data.user.email) {
-            sounds.messageSent();
+      if(newMessage.sender.email !== session.data.user.email) {
+        setMessages((prevValue) => {
+          if(find(prevValue, { id: newMessage.id })) {
+            return prevValue;
           } else {
             sounds.messageReceivedSameChat();
+  
+            return [...prevValue, newMessage];
           }
-
-          return [...prevValue, newMessage];
-        }
-      });
+        });
+      }
 
       axios.post(`/api/conversations/${conversationId}/seen`);
     };
@@ -69,10 +70,17 @@ export default function Body({ initialMessages }) {
 
   useEffect(() => {
     listRef.current.scrollTop = listRef.current.scrollHeight;
+    setIsListScrolledToBottom(true); /** Prevents visible flickering */
   }, [messages?.length]);
 
   return (
-    <div className="flex-1 overflow-y-auto overflow-x-hidden pb-2" ref={listRef}>
+    <div 
+      className={clsx(
+        "flex-1 overflow-y-auto overflow-x-hidden pb-2",
+        isListScrolledToBottom ? "opacity-100" : "opacity-0"
+      )} 
+      ref={listRef}
+    >
       {messages.map((message, index) => (
         <MessageBox
           key={message.id}
