@@ -21,6 +21,12 @@ module.exports = {
         accentsecondary: "rgb(var(--accent-secondary) / <alpha-value>)",
         hoverprimary: "rgb(var(--hover-primary) / <alpha-value>)",
         hoversecondary: "rgb(var(--hover-secondary) / <alpha-value>)",
+        inputprimary: "rgb(var(--input-primary) / <alpha-value>)",
+        accenthover: "rgb(var(--accent-hover) / <alpha-value>)",
+        replybgprimary: "rgb(var(--reply-bg-primary) / <alpha-value>)",
+        replybgsecondary: "rgb(var(--reply-bg-secondary) / <alpha-value>)",
+        replyborder: "rgb(var(--reply-border) / <alpha-value>)",
+        replyhover: "rgb(var(--reply-hover) / <alpha-value>)",
 
         // @tip: IT WOULD BE BETTER TO HAVE MULTIPLE SHADES OF EACH COLORS LIKE THE DEFAULT TAILWIND CONFIG DOES (100, 200, 300...)
         // @note: if some values require "transparent", dont add it here and use theme provider instead and use clsx to add the class conditionally

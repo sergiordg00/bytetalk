@@ -1,5 +1,4 @@
 "use client";
-
 import clsx from "clsx";
 import format from "date-fns/format";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import { FaReply } from "react-icons/fa";
 import { GiBrain } from "react-icons/gi";
 
 import { useReply } from "@/context/ReplyContext";
+import { useTheme } from "@/context/ThemeContext";
 import Avatar from "@/shared-components/ui/Avatar";
 import Reply from "@/shared-components/ui/Reply";
 
@@ -16,6 +16,7 @@ import GPTAdvisor from "./GPTAdvisor";
 import ImageModal from "./ImageModal";
 
 export default function MessageBox({ data, isLast }) {
+  const { theme } = useTheme();
   const { setReply } = useReply();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [messageToAdvise, setMessageToAdvise] = useState(false);
@@ -44,7 +45,7 @@ export default function MessageBox({ data, isLast }) {
   );
   const message = clsx(
     "w-fit overflow-hidden px-3 py-2 text-sm",
-    isOwn ? "bg-accentprimary text-white" : "bg-accentsecondary",
+    isOwn ? "bg-accentprimary text-white" : "bg-accentsecondary text-textprimary",
     data.image ? "rounded-md" : "rounded-lg"
   );
 
@@ -109,11 +110,14 @@ export default function MessageBox({ data, isLast }) {
                 <div 
                   className={clsx(
                     "mb-2 w-full cursor-pointer rounded-lg transition",
-                    isOwn ? "bg-sky-300 hover:bg-sky-400" : "bg-gray-300 hover:bg-gray-400"
+                    isOwn ? 
+                      theme === "light" ? "bg-sky-300 hover:bg-sky-400" : "bg-fuchsia-300 hover:bg-fuchsia-400"
+                      :
+                      theme === "light" ? "bg-gray-300 hover:bg-gray-400" : "bg-stone-700 hover:bg-stone-800" 
                   )}
                   onClick={() => document.getElementById(parsedReply.id).scrollIntoView({ behavior: "smooth" })}
                 >
-                  <Reply data={parsedReply} isInMessageBox/>
+                  <Reply data={parsedReply} isInMessageBox isInMyMessageBox={isOwn}/>
                 </div>
               )}
 

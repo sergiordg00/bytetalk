@@ -19,7 +19,7 @@ export default function MessageInput(inputProps) {
       <input 
         type="text" 
         {...inputProps}
-        className="w-full bg-transparent pr-4 text-black transition focus:outline-none"
+        className="w-full bg-transparent pr-4 text-textprimary transition focus:outline-none"
         autoComplete="off"
         ref={inputRef}
       />

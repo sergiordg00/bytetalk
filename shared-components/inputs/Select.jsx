@@ -5,7 +5,7 @@ import ReactSelect from "react-select";
 export default function Select({ label, value, onChange, options, disabled }) {
   return (
     <div className="z-[100]">
-      <label className="block text-sm font-medium leading-6 text-gray-900">
+      <label className="block text-sm font-medium leading-6 text-textprimary">
         {label}
       </label>
 

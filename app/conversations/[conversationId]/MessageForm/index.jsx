@@ -51,9 +51,9 @@ export default function MessageForm() {
 
   return (
             
-    <div className="w-full border-t border-solid border-gray-200 bg-white p-3 lg:gap-4">
+    <div className="w-full border-t border-solid border-borderprimary bg-bgprimary p-3 lg:gap-4">
       <form onSubmit={onSubmit} className="flex w-full items-end gap-2 lg:gap-4">
-        <div className="w-full rounded-lg bg-neutral-200 p-2">
+        <div className="w-full rounded-lg bg-accentsecondary p-2">
           {reply && <ReplyPreview/>}
 
           <div className="flex w-full items-center gap-1">
@@ -63,8 +63,8 @@ export default function MessageForm() {
               onUpload={handleUploadImage}
               uploadPreset="ccii6bws"
             >
-              <div className="cursor-pointer rounded-full p-1 transition hover:bg-neutral-300">
-                <HiPhoto size={30} className="text-sky-500"/>
+              <div className="cursor-pointer rounded-full p-1 transition hover:bg-accenthover">
+                <HiPhoto size={30} className="text-accentprimary"/>
               </div>
             </CldUploadButton>
 
@@ -78,7 +78,7 @@ export default function MessageForm() {
           </div>
         </div>
 
-        <button type="submit" className="shrink-0 cursor-pointer rounded-full bg-sky-500 p-2 transition hover:bg-sky-600">
+        <button type="submit" className="shrink-0 cursor-pointer rounded-full bg-accentprimary p-2 transition hover:opacity-75">
           <HiPaperAirplane size={18} className="text-white"/>
         </button>
       </form>

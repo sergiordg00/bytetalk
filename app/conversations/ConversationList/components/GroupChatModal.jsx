@@ -39,12 +39,12 @@ export default function GroupChatModal({ isOpen, onClose, users }) {
     <AppModal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={onSubmit}>
         <div className="space-y-5">
-          <div className="border-b border-solid border-gray-900/10 pb-8">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+          <div className="border-b border-solid border-textprimary/10 pb-8">
+            <h2 className="text-base font-semibold leading-7 text-textprimary">
               Create a group chat
             </h2>
 
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 text-sm leading-6 text-textsecondary">
               Create a group chat and add your friends to it.
             </p>
 

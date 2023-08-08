@@ -26,6 +26,14 @@ html, body, :root {
 
     --hover-primary: 229 231 235;
     --hover-secondary: 209 213 219;
+
+    --input-primary: 255 255 255;
+
+    --accent-hover: 212 212 212;
+    --reply-bg-primary: 125 211 252;
+    --reply-bg-secondary: 212 212 212;
+    --reply-border: 7 89 133;
+    --reply-hover: 56 189 248;
   }
 
   [data-theme="dark"] {
@@ -42,9 +50,17 @@ html, body, :root {
     --border-secondary: 87 94 108;
 
     --accent-primary: 217 70 239;
-    --accent-secondary: 45 45 45;/* TODO */
+    --accent-secondary: 45 45 45;
 
     --hover-primary: 78 78 78;
     --hover-secondary: 110 110 110;
+
+    --input-primary: 45 45 45;
+
+    --accent-hover: 58 58 58;
+    --reply-bg-primary: 240 171 252;
+    --reply-bg-secondary: 30 30 30;
+    --reply-border: 134 25 143;
+    --reply-hover: 232 121 249;
   }
 }

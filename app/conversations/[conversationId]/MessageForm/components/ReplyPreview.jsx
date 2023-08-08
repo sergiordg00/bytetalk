@@ -46,12 +46,12 @@ export default function ReplyPreview() {
       onUnmount={() => setReply(null)}
     >
       <div className="h-0 w-full overflow-hidden transition-all duration-300" ref={replyContainer}>
-        <div className="relative w-full rounded-lg bg-neutral-300" ref={replyContent}>
+        <div className="relative w-full rounded-lg bg-replybgsecondary" ref={replyContent}>
           <Reply data={reply}/>
 
           <button 
             type="button" 
-            className="absolute right-0 top-0 p-1 text-gray-400 hover:text-gray-500"
+            className="absolute right-0 top-0 p-1 text-textsecondary hover:text-textmuted"
             onClick={() => setShouldMount(false)}
           >
             <span className="sr-only">
