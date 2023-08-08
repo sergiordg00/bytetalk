@@ -89,7 +89,8 @@ export async function POST(req) {
     updatedConversation.users.forEach((user) => {
       pusherServer.trigger(user.email, "conversation:update", {
         id: conversationId,
-        messages: [lastMessage]
+        messages: [lastMessage],
+        type: "new"
       });
     });
 

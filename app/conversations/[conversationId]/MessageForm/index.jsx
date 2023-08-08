@@ -1,14 +1,18 @@
 "use client";
 
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { CldUploadButton } from "next-cloudinary";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { HiPhoto } from "react-icons/hi2";
 import { HiPaperAirplane } from "react-icons/hi2";
+import { v4 as uuidv4 } from "uuid";
 
 import { useReply } from "@/context/ReplyContext";
 import useConversation from "@/hooks/useConversation";
+
+import { useMessages } from "../context/MessagesContext";
 
 import MessageInput from "./components/MessageInput";
 import ReplyPreview from "./components/ReplyPreview";
@@ -19,20 +23,49 @@ const INITIAL_FORM_STATE = {
 
 export default function MessageForm() {
   const { conversationId } = useConversation();
+  const { setMessages } = useMessages();
   const { reply, setReply } = useReply();
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
+  const session = useSession();
 
   function onSubmit(e) {
     e.preventDefault();
     setFormState(INITIAL_FORM_STATE);
     setReply(null);
 
+    const TEMPORAL_MESSAGE_ID = uuidv4();
+
+    setMessages((prevValue) => [
+      ...prevValue,
+      {
+        id: TEMPORAL_MESSAGE_ID,
+        body: formState.message,
+        conversationId,
+        createdAt: new Date().toISOString(),
+        reply: reply,
+        seen: [],
+        sender: session.data.user,
+        seenIds: [],
+        senderId: session.data.user.id,
+        loading: true
+      }
+    ]);
+
     axios.post("/api/messages", {
       ...formState, /** The current value of the state will still be available, the changed value will only appear on next render */
       conversationId,
       reply: reply
     })
-      .then((data) => {})
+      .then(({ data }) => (
+        setMessages((prevValue) => (
+          prevValue.map((message) => {
+            if (message.id === TEMPORAL_MESSAGE_ID) {
+              return data;
+            }
+            return message;
+          })
+        ))
+      ))
       .catch(() => {
         toast.error("Failed to send message");
       });
@@ -41,12 +74,43 @@ export default function MessageForm() {
   function handleUploadImage(result) {
     setFormState(INITIAL_FORM_STATE);
     setReply(null);
+
+    const TEMPORAL_MESSAGE_ID = uuidv4();
+
+    setMessages((prevValue) => [
+      ...prevValue,
+      {
+        id: TEMPORAL_MESSAGE_ID,
+        image: result?.info?.secure_url,
+        conversationId,
+        createdAt: new Date().toISOString(),
+        reply: reply,
+        seen: [],
+        sender: session.data.user,
+        seenIds: [],
+        senderId: session.data.user.id,
+        loading: true
+      }
+    ]);
     
     axios.post("/api/messages", {
       conversationId,
       image: result?.info?.secure_url,
       reply: reply
-    });
+    })
+      .then(({ data }) => (
+        setMessages((prevValue) => (
+          prevValue.map((message) => {
+            if (message.id === TEMPORAL_MESSAGE_ID) {
+              return data;
+            }
+            return message;
+          })
+        ))
+      ))
+      .catch(() => {
+        toast.error("Failed to send message");
+      });
   }
 
   return (

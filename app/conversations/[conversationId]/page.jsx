@@ -3,6 +3,7 @@ import getConversationById from "@/services/getConversationById";
 import getMessages from "@/services/getMessages";
 import EmptyState from "@/shared-components/ui/EmptyState";
 
+import MessagesProvider from "./context/MessagesContext";
 import Body from "./Body";
 import Header from "./Header";
 import MessageForm from "./MessageForm";
@@ -26,15 +27,17 @@ export default async function ConversationPage({ params }) {
 
   return (
     <ReplyProvider>
-      <div className="h-full bg-bgprimary lg:pl-80">
-        <div className="flex h-full flex-col">
-          <Header conversation={conversation}/>
+      <MessagesProvider initialMessages={messages}>
+        <div className="h-full bg-bgprimary lg:pl-80">
+          <div className="flex h-full flex-col">
+            <Header conversation={conversation}/>
 
-          <Body initialMessages={messages}/>
+            <Body/>
 
-          <MessageForm/>
+            <MessageForm/>
+          </div>
         </div>
-      </div>
+      </MessagesProvider>
     </ReplyProvider>
   );
 }

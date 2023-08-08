@@ -35,7 +35,8 @@
     "react-icons": "^4.10.1",
     "react-loader-spinner": "^5.3.4",
     "react-select": "^5.7.4",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^8.44.0",

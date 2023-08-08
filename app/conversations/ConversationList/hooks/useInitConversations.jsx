@@ -38,7 +38,7 @@ export default function useInitConversations(initialConversations, conversationI
         })
       ));
 
-      if(conversationId !== updatedConversation.id) {
+      if(conversationId !== updatedConversation.id && updatedConversation.type === "new") {
         sounds.messageReceivedDifferentChat();
         toast.success("You have a new message");
       }
