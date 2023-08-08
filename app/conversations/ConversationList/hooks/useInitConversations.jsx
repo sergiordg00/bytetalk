@@ -1,12 +1,15 @@
 import { find } from "lodash";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
+import usePlaySound from "@/hooks/usePlaySound";
 import { pusherClient } from "@/libs/pusher";
 
 export default function useInitConversations(initialConversations, conversationId, currentUser) {
   const [conversations, setConversations] = useState(initialConversations);
   const router = useRouter();
+  const sounds = usePlaySound();
 
   useEffect(() => {
     pusherClient.subscribe(currentUser.email);
@@ -34,6 +37,11 @@ export default function useInitConversations(initialConversations, conversationI
           return conversation;
         })
       ));
+
+      if(conversationId !== updatedConversation.id) {
+        sounds.messageReceivedDifferentChat();
+        toast.success("You have a new message");
+      }
     };
 
     const handleRemoveConversation = (removedConversation) => {

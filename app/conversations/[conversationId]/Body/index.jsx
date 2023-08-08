@@ -2,10 +2,12 @@
 
 import axios from "axios";
 import { find } from "lodash";
+import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 
 import useConversation from "@/hooks/useConversation";
+import usePlaySound from "@/hooks/usePlaySound";
 import { pusherClient } from "@/libs/pusher";
 
 import MessageBox from "./components/MessageBox";
@@ -14,6 +16,8 @@ export default function Body({ initialMessages }) {
   const { conversationId } = useConversation();
   const [messages, setMessages] = useState(initialMessages);
   const listRef = useRef();
+  const sounds = usePlaySound();
+  const session = useSession();
 
   useEffect(() => {
     axios.post(`/api/conversations/${conversationId}/seen`);
@@ -28,6 +32,12 @@ export default function Body({ initialMessages }) {
         if(find(prevValue, { id: newMessage.id })) {
           return prevValue;
         } else {
+          if(newMessage.sender.email === session.data.user.email) {
+            sounds.messageSent();
+          } else {
+            sounds.messageReceivedSameChat();
+          }
+
           return [...prevValue, newMessage];
         }
       });
