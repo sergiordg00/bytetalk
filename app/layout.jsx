@@ -25,9 +25,8 @@ export default async function RootLayout({ children }) {
             {children}
           </AuthContext>
         
+          <div id="portal"></div>
         </ThemeProvider>
-        
-        <div id="portal"></div>
       </body>
     </html>
   );

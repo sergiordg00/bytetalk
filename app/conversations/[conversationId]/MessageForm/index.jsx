@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useReply } from "@/context/ReplyContext";
 import useConversation from "@/hooks/useConversation";
+import usePlaySound from "@/hooks/usePlaySound";
 
 import { useMessages } from "../context/MessagesContext";
 
@@ -27,90 +28,62 @@ export default function MessageForm() {
   const { reply, setReply } = useReply();
   const [formState, setFormState] = useState(INITIAL_FORM_STATE);
   const session = useSession();
+  const sounds = usePlaySound();
+
+  function submitMessage(message, image, replyData) {
+    setFormState(INITIAL_FORM_STATE);
+    setReply(null);
+
+    const TEMPORAL_MESSAGE_ID = uuidv4();
+
+    setMessages((prevValue) => [
+      ...prevValue,
+      {
+        id: TEMPORAL_MESSAGE_ID,
+        body: message,
+        image: image,
+        conversationId,
+        createdAt: new Date().toISOString(),
+        reply: replyData,
+        seen: [],
+        sender: session.data.user,
+        seenIds: [],
+        senderId: session.data.user.id,
+        loading: true
+      }
+    ]);
+
+    axios.post("/api/messages", {
+      message,
+      image,
+      conversationId,
+      reply: replyData
+    })
+      .then(({ data }) => {
+        setMessages((prevValue) => (
+          prevValue.map((message) => {
+            if (message.id === TEMPORAL_MESSAGE_ID) {
+              return data;
+            }
+            return message;
+          })
+        ));
+
+        sounds.messageSent();
+      })
+      .catch(() => {
+        toast.error("Failed to send message");
+      });
+
+  }
 
   function onSubmit(e) {
     e.preventDefault();
-    setFormState(INITIAL_FORM_STATE);
-    setReply(null);
-
-    const TEMPORAL_MESSAGE_ID = uuidv4();
-
-    setMessages((prevValue) => [
-      ...prevValue,
-      {
-        id: TEMPORAL_MESSAGE_ID,
-        body: formState.message,
-        conversationId,
-        createdAt: new Date().toISOString(),
-        reply: reply,
-        seen: [],
-        sender: session.data.user,
-        seenIds: [],
-        senderId: session.data.user.id,
-        loading: true
-      }
-    ]);
-
-    axios.post("/api/messages", {
-      ...formState, /** The current value of the state will still be available, the changed value will only appear on next render */
-      conversationId,
-      reply: reply
-    })
-      .then(({ data }) => (
-        setMessages((prevValue) => (
-          prevValue.map((message) => {
-            if (message.id === TEMPORAL_MESSAGE_ID) {
-              return data;
-            }
-            return message;
-          })
-        ))
-      ))
-      .catch(() => {
-        toast.error("Failed to send message");
-      });
+    submitMessage(formState.message, undefined, reply);
   }
 
   function handleUploadImage(result) {
-    setFormState(INITIAL_FORM_STATE);
-    setReply(null);
-
-    const TEMPORAL_MESSAGE_ID = uuidv4();
-
-    setMessages((prevValue) => [
-      ...prevValue,
-      {
-        id: TEMPORAL_MESSAGE_ID,
-        image: result?.info?.secure_url,
-        conversationId,
-        createdAt: new Date().toISOString(),
-        reply: reply,
-        seen: [],
-        sender: session.data.user,
-        seenIds: [],
-        senderId: session.data.user.id,
-        loading: true
-      }
-    ]);
-    
-    axios.post("/api/messages", {
-      conversationId,
-      image: result?.info?.secure_url,
-      reply: reply
-    })
-      .then(({ data }) => (
-        setMessages((prevValue) => (
-          prevValue.map((message) => {
-            if (message.id === TEMPORAL_MESSAGE_ID) {
-              return data;
-            }
-            return message;
-          })
-        ))
-      ))
-      .catch(() => {
-        toast.error("Failed to send message");
-      });
+    submitMessage("", result?.info?.secure_url, reply);
   }
 
   return (

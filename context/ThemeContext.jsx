@@ -2,26 +2,36 @@
 
 import { createContext, useContext, useEffect,  useState } from "react";
 
+import useIsFirstRender from "@/hooks/useIsFirstRender";
+
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  // TODO: THE BEST WAY FOR THE THEME IS TO USE COOKIES SO THAT SERVER CAN RENDER IN THE CORRECT THEME
+  const [theme, setTheme] = useState("light");
+  const isFirstRender = useIsFirstRender();
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.body.setAttribute("data-theme", theme); /* For portals */
+    initThemeOnClient();
+  }, []);
+
+  useEffect(() => {
+    if (!isFirstRender) {
+      localStorage.setItem("theme", theme);
+      document.body.setAttribute("data-theme", theme); 
+    }
   }, [theme]);
+
+  function initThemeOnClient() {
+    const themeInitValue = localStorage.getItem("theme") || "light";
+
+    document.body.setAttribute("data-theme", themeInitValue);
+    setTheme(themeInitValue);
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {/* 
-        This div is necessary because due to server components being rendered on the server (no localStorage) 
-        i need to be able to set the theme on render phase. But i also need to add it to body later (client side) for portals 
-      */}
-      
-      <div className="h-full w-full" data-theme={theme}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 }

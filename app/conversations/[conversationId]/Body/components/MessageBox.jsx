@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 import { FaReply } from "react-icons/fa";
 import { GiBrain } from "react-icons/gi";
+import { RotatingLines } from "react-loader-spinner";
 
 import { useReply } from "@/context/ReplyContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -27,7 +28,7 @@ export default function MessageBox({ data, isLast }) {
     try {
       return JSON.parse(data.reply);
     } catch (e) {
-      return null;
+      return data.reply;
     }
   }, [data.reply]);
 
@@ -88,21 +89,31 @@ export default function MessageBox({ data, isLast }) {
               "flex items-center gap-x-1",
               !isOwn && "order-2"
             )}>
-              <div 
-                className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-hoversecondary group-hover:opacity-100"
-                onClick={() => setReply(data)}
-              >
-                <FaReply size={18} className="text-textprimary"/> 
-              </div>
+              {
+                data.loading ?
+                  <RotatingLines
+                    strokeColor="gray"
+                    width={22}
+                  />
+                  :
+                  <>
+                    <div 
+                      className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-hoversecondary group-hover:opacity-100"
+                      onClick={() => setReply(data)}
+                    >
+                      <FaReply size={18} className="text-textprimary"/> 
+                    </div>
             
-              {!data.image && !isOwn && (
-                <div 
-                  className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-hoversecondary group-hover:opacity-100"
-                  onClick={() => setMessageToAdvise(data)}
-                >
-                  <GiBrain size={24} className="text-textprimary"/> 
-                </div>
-              )}
+                    {!data.image && !isOwn && (
+                      <div 
+                        className="cursor-pointer rounded-full p-2 opacity-0 transition hover:bg-hoversecondary group-hover:opacity-100"
+                        onClick={() => setMessageToAdvise(data)}
+                      >
+                        <GiBrain size={24} className="text-textprimary"/> 
+                      </div>
+                    )}
+                  </>
+              }
             </div>
           
             <div className={message}>

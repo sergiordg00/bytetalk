@@ -56,7 +56,13 @@ export async function POST(req) {
             image: true
           }
         },
-        seen: true,
+        seen: {
+          select: {
+            id: true,
+            email: true,
+            name: true
+          }
+        },
       }
     });
 
@@ -76,7 +82,11 @@ export async function POST(req) {
         users: true,
         messages: {
           include: {
-            seen: true
+            seen: {
+              select: {
+                email: true
+              }
+            }
           }
         }
       }

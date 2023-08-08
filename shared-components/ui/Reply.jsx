@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 
@@ -8,7 +10,7 @@ export default function Reply({ data, isInMessageBox=false, isInMyMessageBox }) 
   const { theme } = useTheme();
   const session = useSession();
   const isOwn = session?.data?.user?.email === data?.sender?.email;
-  
+
   return (
     <div className="flex w-full gap-x-2 overflow-hidden rounded-lg">
       <div className={clsx(
