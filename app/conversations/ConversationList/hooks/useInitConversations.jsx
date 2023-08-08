@@ -15,6 +15,7 @@ export default function useInitConversations(initialConversations, conversationI
     pusherClient.subscribe(currentUser.email);
 
     const handleNewConversation = (newConversation) => {
+      console.log("Hey");
       setConversations((prevValue) => {
         if(find(prevValue, { id: newConversation.id })) {
           return prevValue;
@@ -44,12 +45,12 @@ export default function useInitConversations(initialConversations, conversationI
       }
     };
 
-    const handleRemoveConversation = (removedConversation) => {
+    const handleRemoveConversation = (removedConversationId) => {
       setConversations((prevValue) => (
-        prevValue.filter((conversation) => conversation.id !== removedConversation.id)
+        prevValue.filter((conversation) => conversation.id !== removedConversationId)
       ));
 
-      if(conversationId === removedConversation.id) {
+      if(conversationId === removedConversationId) {
         router.push("/conversations");
       }
     };

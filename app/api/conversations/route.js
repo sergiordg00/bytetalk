@@ -39,7 +39,14 @@ export async function POST(req) {
           }
         },
         include: {
-          users: true // This populates the users array
+          users: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              image: true
+            }
+          }
         }
       });
 
@@ -87,7 +94,14 @@ export async function POST(req) {
             }
           },
           include: {
-            users: true // This populates the users array
+            users: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                image: true
+              }
+            }
           }
         });
 

@@ -36,11 +36,12 @@ export async function DELETE(req, { params }) {
     });
 
     conversation.users.forEach(user => {
-      pusherServer.trigger(user.email, "conversation:remove", conversation);
+      pusherServer.trigger(user.email, "conversation:remove", conversation.id);
     });
 
     return NextResponse.json(deletedConversation);
   } catch(err) {
+    console.log(err);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
