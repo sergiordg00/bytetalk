@@ -109,11 +109,11 @@ export default function MessageBox({ data, isLast }) {
               {data.reply && (
                 <div 
                   className={clsx(
-                    "mb-2 w-full cursor-pointer rounded-lg transition",
+                    "mb-2 w-full cursor-pointer rounded-lg",
                     isOwn ? 
                       theme === "light" ? "bg-sky-300 hover:bg-sky-400" : "bg-fuchsia-300 hover:bg-fuchsia-400"
                       :
-                      theme === "light" ? "bg-gray-300 hover:bg-gray-400" : "bg-stone-700 hover:bg-stone-800" 
+                      theme === "light" ? "bg-gray-300 hover:bg-gray-400" : "bg-stone-800 hover:bg-stone-700" 
                   )}
                   onClick={() => document.getElementById(parsedReply.id).scrollIntoView({ behavior: "smooth" })}
                 >

@@ -26,7 +26,7 @@ export default function UserBox({ data: user }) {
   }
 
   return (
-    <div className="relative flex w-full cursor-pointer items-center space-x-3 rounded-lg bg-bgsecondary p-3 transition hover:bg-hoverprimary" onClick={onClick}>
+    <div className="relative flex w-full cursor-pointer items-center space-x-3 rounded-lg bg-bgsecondary p-3 hover:bg-hoverprimary" onClick={onClick}>
       <Avatar user={user}/>
 
       <div className="min-w-0 flex-1">

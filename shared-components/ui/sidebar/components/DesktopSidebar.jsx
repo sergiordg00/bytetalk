@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-import { useTheme } from "@/context/ThemeContext";
 import useRoutes from "@/hooks/useRoutes";
 import Avatar from "@/shared-components/ui/Avatar";
 
 import SettingsModal from "./SettingsModal";
+import SwitchTheme from "./SwitchTheme";
 
 function DesktopItem({ href, label, icon: Icon, active, onClick }) {
   return (
@@ -33,7 +33,6 @@ function DesktopItem({ href, label, icon: Icon, active, onClick }) {
 }
 
 export default function DesktopSidebar({ user }) {
-  const { toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const routes = useRoutes();
   const session = useSession();
@@ -46,7 +45,7 @@ export default function DesktopSidebar({ user }) {
         onClose={() => setIsOpen(false)}
       />
 
-      <div className="fixed inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-borderprimary bg-bgtertiary py-4 lg:flex xl:px-6">
+      <div className="fixed inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-borderprimary bg-bgtertiary px-3 py-4 lg:flex">
         <nav className="flex flex-col justify-between">
           <ul role="list" className="flex flex-col items-center gap-y-1">
             {routes.map((item) => (
@@ -63,9 +62,7 @@ export default function DesktopSidebar({ user }) {
         </nav>
 
         <nav className="mt-4 flex flex-col items-center justify-between gap-y-4">
-          <button className="cursor-pointer rounded-lg bg-fuchsia-500 p-2 text-sm transition hover:ring-2 hover:ring-fuchsia-900 active:translate-y-1 active:scale-90" onClick={toggleTheme}>
-            Change theme
-          </button>
+          <SwitchTheme />
 
           <div onClick={() => setIsOpen(true)} className="cursor-pointer hover:opacity-75">
             <Avatar user={session?.data?.user || user}/>

@@ -55,7 +55,7 @@ export default function ConversationBox({ data, selected }) {
   
   return (
     <div onClick={onClick} className={clsx(
-      "relative flex w-full cursor-pointer items-center space-x-3 rounded-lg p-3 transition hover:bg-hoverprimary",
+      "relative flex w-full cursor-pointer items-center space-x-3 rounded-lg p-3 hover:bg-hoverprimary",
       selected ? "bg-hoverprimary" : "bg-bgsecondary"
     )}>
       {

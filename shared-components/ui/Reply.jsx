@@ -31,8 +31,8 @@ export default function Reply({ data, isInMessageBox=false, isInMyMessageBox }) 
 
         <p className={clsx(
           "line-clamp-2 w-full text-sm",
-          isInMessageBox && isInMyMessageBox ? 
-            theme === "light" ? "text-textsecondary" : "text-black"
+          isInMessageBox && isInMyMessageBox && theme === "dark" ?  
+            "text-black"
             : 
             "text-textsecondary"
         )}>
