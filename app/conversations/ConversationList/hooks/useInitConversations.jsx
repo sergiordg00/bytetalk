@@ -15,7 +15,6 @@ export default function useInitConversations(initialConversations, conversationI
     pusherClient.subscribe(currentUser.email);
 
     const handleNewConversation = (newConversation) => {
-      console.log("Hey");
       setConversations((prevValue) => {
         if(find(prevValue, { id: newConversation.id })) {
           return prevValue;

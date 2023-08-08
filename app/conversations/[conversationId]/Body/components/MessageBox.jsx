@@ -128,7 +128,11 @@ export default function MessageBox({ data, isLast }) {
                   )}
                   onClick={() => document.getElementById(parsedReply.id).scrollIntoView({ behavior: "smooth" })}
                 >
-                  <Reply data={parsedReply} isInMessageBox isInMyMessageBox={isOwn}/>
+                  <Reply 
+                    data={parsedReply} 
+                    isInMessageBox 
+                    isInMyMessageBox={isOwn}
+                  />
                 </div>
               )}
 

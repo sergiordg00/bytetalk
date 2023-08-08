@@ -35,7 +35,10 @@ export default function ConversationsList({ initialConversations, users, current
             Messages
             </h2>
 
-            <div className="cursor-pointer rounded-full bg-hoverprimary p-2 text-textsecondary hover:opacity-75" onClick={() => setIsModalOpen(true)}>
+            <div 
+              className="cursor-pointer rounded-full bg-hoverprimary p-2 text-textsecondary hover:opacity-75" 
+              onClick={() => setIsModalOpen(true)}
+            >
               <MdOutlineGroupAdd size={20}/>
             </div>
           </div>

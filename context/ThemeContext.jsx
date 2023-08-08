@@ -7,7 +7,7 @@ import useIsFirstRender from "@/hooks/useIsFirstRender";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  // TODO: THE BEST WAY FOR THE THEME IS TO USE COOKIES SO THAT SERVER CAN RENDER IN THE CORRECT THEME
+  // TODO: THE BEST WAY FOR THE THEME IS TO USE COOKIES SO THAT SERVER CAN RENDER IN THE CORRECT THEME. (we could init the body in layout.jsx and this state)
   const [theme, setTheme] = useState("light");
   const isFirstRender = useIsFirstRender();
 

@@ -9,7 +9,6 @@ import Reply from "@/shared-components/ui/Reply";
 export default function ReplyPreview() {
   const { reply, setReply } = useReply();
   const [shouldMount, setShouldMount] = useState(Boolean(reply));
-  const [applyEnterAnimation, setApplyEnterAnimation] = useState(false);
   const replyContainer = useRef(null);
   const replyContent = useRef(null);
 
@@ -23,21 +22,11 @@ export default function ReplyPreview() {
 
   useEffect(() => {
     if (shouldMount) {
-      setApplyEnterAnimation(true);
-    } else {
-      setApplyEnterAnimation(false);
+      replyContainer.current.style.height = `${replyContent.current.offsetHeight}px`;
+    } else if(replyContainer.current) {
+      replyContainer.current.style.height = "";
     }
-  }, [shouldMount]);
-
-  useEffect(() => {
-    if(replyContainer.current) {
-      if (applyEnterAnimation) {
-        replyContainer.current.style.height = `${replyContent.current.offsetHeight}px`;
-      } else {
-        replyContainer.current.style.height = "";
-      }
-    }
-  }, [applyEnterAnimation, reply]);
+  }, [shouldMount, reply]);
 
   return (
     <DelayUnmount 
