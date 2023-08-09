@@ -45,7 +45,7 @@ export default function DesktopSidebar({ user }) {
         onClose={() => setIsOpen(false)}
       />
 
-      <div className="fixed inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-borderprimary bg-bgtertiary px-3 py-4 lg:flex">
+      <div className="absolute inset-y-0 left-0 z-40 hidden w-20 flex-col justify-between overflow-y-auto border-r-[1px] border-solid border-r-borderprimary bg-bgtertiary px-3 py-4 lg:flex">
         <nav className="flex flex-col justify-between">
           <ul role="list" className="flex flex-col items-center gap-y-1">
             {routes.map((item) => (

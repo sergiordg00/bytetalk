@@ -1,4 +1,5 @@
 import getUsers from "@/services/getUsers";
+import ChatFrame from "@/shared-components/ui/ChatFrame";
 import EmptyState from "@/shared-components/ui/EmptyState";
 import Sidebar from "@/shared-components/ui/Sidebar";
 
@@ -13,14 +14,16 @@ export default async function Users() {
   const users = await getUsers();
 
   return (
-    <Sidebar>
-      <div className="h-full">
-        <UsersList users={users}/>
+    <ChatFrame>
+      <Sidebar>
+        <div className="h-full">
+          <UsersList users={users}/>
       
-        <div className="hidden h-full lg:block lg:pl-80">
-          <EmptyState />
+          <div className="hidden h-full lg:block lg:pl-80">
+            <EmptyState />
+          </div>
         </div>
-      </div>
-    </Sidebar>
+      </Sidebar>
+    </ChatFrame>
   );
 }

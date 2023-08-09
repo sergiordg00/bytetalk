@@ -25,7 +25,7 @@ export default function ConversationsList({ initialConversations, users, current
       />
 
       <aside className={clsx(
-        "fixed inset-y-0 overflow-y-auto border-r border-solid border-borderprimary bg-bgsecondary pb-20",
+        "absolute inset-y-0 overflow-y-auto border-r border-solid border-borderprimary bg-bgsecondary pb-20",
         "lg:left-20 lg:block lg:w-80 lg:pb-0",
         isOpen ? "hidden" : "left-0 block w-full"
       )}>
